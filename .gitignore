@@ -133,3 +133,4 @@ dmypy.json
 .pyc
 .db
 grocery_lister_server/data.db
+grocery_lister_client/node_modules/*
