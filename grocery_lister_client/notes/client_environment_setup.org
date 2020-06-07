@@ -1,0 +1,49 @@
+1) Install nvm if it doesn't exist
+https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/
+
+2) install node
+# to install node, nvm install node
+# at the time, using version 12.18.0
+nvm install --lts
+nvm use --lts
+
+3) install react (from a lower level)
+# facebook*create-react-app
+npx create-react-app reactivities_client --use-npm --typescript
+
+4) install various npm components
+# semantic ui
+npm install semantic-ui-react
+
+# React Final Form - for components prepared for browser forms
+npm install react-final-form final-form
+
+# React Router
+npm install react-router-dom
+npm install @types/react-router-dom
+
+# React Toastify
+https://fkhadra.github.io/react-toastify/introduction/
+npm install --save react-toastify
+
+# React Widget
+https://jquense.github.io/react-widgets/
+npm install react-widgets react-widgets-date-fns
+
+npm install @types/react-widgets
+npm install @types/react-widgets-date-fns
+# npm install @types/react-widgets-date-fns
+
+for the project we use the bottom
+# npm install react-widgets@4.4.11 react-widgets-date-fns@4.0.26 date-fns@2.0.0-alpha.13
+
+# React Date Logic Library
+https://date-fns.org/docs/Getting-Started
+npm install date-fns
+
+# Revalidate
+http://revalidate.jeremyfairbank.com/
+validates field data for client side
+npm install --save revalidate
+installing type definition
+npm install @types/revalidate

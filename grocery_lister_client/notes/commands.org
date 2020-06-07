@@ -11,3 +11,8 @@ nvm -h
 nvm --version
 
 * npm commands
+# look for outdated packages/components
+npm outdated
+
+# fix npm files
+npm audit fix
