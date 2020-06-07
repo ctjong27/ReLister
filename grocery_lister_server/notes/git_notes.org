@@ -13,3 +13,20 @@ git add .
 
 # git commit changes
 git commit -m 'readme added'
+
+# pushes the branch feature/item-categories into origin remote repository and creates that branch there
+# this means local and remote has the branch
+git push --set-upstream origin feature/item-categories
+
+# if branch already exists remote, then this works
+git push
+
+# checking out master to push changes in
+git checkout master
+git merge feature/item-categories
+
+# you need to then update the changed master branch
+git push
+
+# once done with the particular issue, you delete the branch
+git branch -d feature/item-categories
