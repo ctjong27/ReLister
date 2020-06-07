@@ -1,0 +1,12 @@
+1) Install nvm if it doesn't exist
+https://nodesource.com/blog/installing-node-js-tutorial-using-nvm-on-mac-os-x-and-ubuntu/
+
+2) install node
+# to install node, nvm install node
+# at the time, using version 12.18.0
+nvm install --lts
+nvm use --lts
+
+3) install react (from a lower level)
+# facebook*create-react-app
+npx create-react-app reactivities_client --use-npm --typescript
