@@ -20,7 +20,8 @@ class UserModel(db.Model):
 
     def json(self):
         # return {'name':self.name} # todo: json resturn updates
-        return {'username':self.username, 'items':[item.json() for item in self.items.all()]} # items.all() is because relationship is lazy=dynamic
+        # return {'username':self.username, 'items':[item.json() for item in self.items.all()]} # items.all() is because relationship is lazy=dynamic
+        return {'username':self.username, 'groups':[group.json() for group in self.groups.all()]} # items.all() is because relationship is lazy=dynamic
 
     def save_to_db(self):
         db.session.add(self)

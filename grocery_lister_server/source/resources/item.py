@@ -69,9 +69,13 @@ class Item(Resource):
         item = ItemModel.find_by_name(name)
         try:
             if item:
-                item.price = data['price']
+    # id, name, group_id, actual_amount, total_amount, unit
+                item.actual_amount = data['actual_amount']
+                item.total_amount = data['total_amount']
+                item.unit = data['unit']
             else:
-                item = ItemModel(name, data['price'],data['group_id'])
+                item = ItemModel(name,**data)
+                # item = ItemModel(name, data['price'],data['group_id'])
         except:
             return {'message':'an error occured'}, 500 # internal server error
 
