@@ -1,0 +1,15 @@
+* git commands
+# creates new branch
+git branch feature/item-categories
+
+# switches to new branch
+git checkout feature/item-categories
+
+# check status
+git status
+
+# add git 
+git add .
+
+# git commit changes
+git commit -m 'readme added'

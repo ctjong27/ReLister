@@ -1,0 +1,10 @@
+* handling existing group (?)
+if there is no item with existing group, then new group of that type can be added
+to erase group item, entire group should be deleted (or i guess all items, whatever you want)
+
+* items structure can be reused for group_items
+
+* code structure
+item > group
+item > user
+group > user

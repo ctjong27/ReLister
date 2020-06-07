@@ -1,0 +1,4 @@
+# User Added Ignores
+*__pycache__/
+source/__pycache__/*
+source/models/__pycache__/item.cpython-38.pyc
