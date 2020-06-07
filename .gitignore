@@ -1,6 +1,3 @@
-# User Input Ignore
-.pyc
-.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -131,3 +128,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# User Input Ignore
+.pyc
+.db
+grocery_lister_server/data.db

@@ -18,6 +18,7 @@ class Group(Resource): # extending resource class
         return {'message':'group not found'}, 404
 
     def post(self, name):
+        
         if GroupModel.find_by_name(name):
             return {'messsage':'group {} already exists'.format(name)}, 400
 

@@ -5,9 +5,9 @@ class GroupModel(db.Model):
 
     __tablename__ = 'groups'
 
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     name = db.Column(db.String(80))
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
     # Linked Foreign Key
     items = db.relationship('ItemModel', lazy='dynamic')
@@ -17,6 +17,7 @@ class GroupModel(db.Model):
 
     def __init__(self, name, user_id):
         self.name = name
+        self.id = 1
         self.user_id = user_id
 
     def json(self):
