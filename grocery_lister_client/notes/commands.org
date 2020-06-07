@@ -1,0 +1,18 @@
+* nvm commands
+# Full available versions
+nvm ls-remote
+# View Versions
+nvm ls
+# view currently used
+nvm current
+# nvm help
+nvm -h
+# nvm version
+nvm --version
+
+* npm commands
+# look for outdated packages/components
+npm outdated
+
+# fix npm files
+npm audit fix
