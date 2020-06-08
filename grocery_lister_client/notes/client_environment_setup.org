@@ -47,3 +47,7 @@ validates field data for client side
 npm install --save revalidate
 installing type definition
 npm install @types/revalidate
+
+# mobx and mobx-react-lite allows us to use with functional components
+npm install mobx mobx-react-lite
+
