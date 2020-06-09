@@ -13,7 +13,7 @@ npx create-react-app reactivities_client --use-npm --typescript
 
 4) install various npm components
 # semantic ui
-npm install semantic-ui-react
+npm install semantic-ui-react semantic-ui-css
 
 # React Final Form - for components prepared for browser forms
 npm install react-final-form final-form
@@ -51,3 +51,5 @@ npm install @types/revalidate
 # mobx and mobx-react-lite allows us to use with functional components
 npm install mobx mobx-react-lite
 
+# axios
+npm install axios

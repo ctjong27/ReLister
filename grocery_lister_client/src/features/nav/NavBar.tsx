@@ -1,31 +1,17 @@
-import React from "react";
-import { Menu, Container, Button } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Menu, Container, Button, Segment } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
+import { UserFormValues } from "../../app/models/user";
 
 export const NavBar: React.FC = () => {
+  
+  const [user, setActivity] = useState(new UserFormValues());
+
   return (
-    <Menu fixed="top" inverted>
-      <Container>
-        <Menu.Item as={NavLink} exact to="/">
-          <img
-            src="/assets/logo.png"
-            alt="logo"
-            style={{ marginRight: "10px" }}
-          />
-          Reactivities
-        </Menu.Item>
-        <Menu.Item name="Activities" as={NavLink} to="/activities" />
-        <Menu.Item>
-          <Button
-            as={NavLink}
-            to="/createActivity"
-            positive
-            content="Create Activity"
-          />
-        </Menu.Item>
-      </Container>
-    </Menu>
+    // https://react.semantic-ui.com/collections/menu/#types-basic
+    
+
   );
 };
 
