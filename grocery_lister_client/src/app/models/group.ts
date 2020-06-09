@@ -1,5 +1,6 @@
 export interface IGroup {
     id: string;
+    name: string;
     title: string;
     description: string;
     category: string;

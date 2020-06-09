@@ -3,7 +3,7 @@ import { Menu, Container, Button, Segment } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 
-export const NavBar: React.FC = () => {
+export const NavBarAuth: React.FC = () => {
   return (
     // https://react.semantic-ui.com/collections/menu/#types-basic
 
@@ -51,4 +51,4 @@ export const NavBar: React.FC = () => {
   );
 };
 
-export default observer(NavBar);
+export default observer(NavBarAuth);

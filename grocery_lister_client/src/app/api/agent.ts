@@ -10,7 +10,6 @@ axios.defaults.baseURL = 'http://localhost:5000/'; // all api will now use this 
 // handle requests
 axios.interceptors.response.use(undefined, error => {
 
-
     if (error.message === 'Network Error' && !error.response) {
         toast.error('Network Error - API!');
     }
@@ -46,23 +45,22 @@ const requests = {
     del: (url:string) => axios.delete(url).then(sleep(1000)).then(responseBody),
 }
 
-const Groups ={
-    list: (): Promise<IGroup[]> => requests.get('/activities'),
-    details: (id: string) => requests.get(`/activities/${id}`),
-    create: (activity:IGroup) => requests.post('/activities', activity),
-    update: (activity:IGroup) => requests.put(`/activities/${activity.id}`, activity),
-    delete: (id:string) => requests.del(`/activities/${id}`),  
-}
-
 
 const Items ={
-    list: (): Promise<IItem[]> => requests.get('/activities'),
-    details: (id: string) => requests.get(`/activities/${id}`),
-    create: (activity:IItem) => requests.post('/activities', activity),
-    update: (activity:IItem) => requests.put(`/activities/${activity.id}`, activity),
-    delete: (id:string) => requests.del(`/activities/${id}`),  
+    list: (): Promise<IItem[]> => requests.get('/items'),
+    details: (name: string) => requests.get(`/group/${name}`),
+    create: (item:IItem) => requests.post('/group', item),
+    update: (item:IItem) => requests.put(`/activities/${item.name}`, item),
+    delete: (name:string) => requests.del(`/activities/${name}`),  
 }
 
+const Groups ={
+    list: (): Promise<IGroup[]> => requests.get('/groups'),
+    details: (name: string) => requests.get(`/group/${name}`),
+    create: (group:IGroup) => requests.post('/group', group),
+    update: (group:IGroup) => requests.put(`/activities/${group.name}`, group),
+    delete: (name:string) => requests.del(`/activities/${name}`),  
+}
 
 const User ={
     list: (): Promise<IUser[]> => requests.get('/activities'),

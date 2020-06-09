@@ -28,7 +28,7 @@ class GroupStore {
           return activities;
         },
 
-        {} as { [key: string]: IActivity[] }));
+        {} as { [key: string]: IGroup[] }));
       }
     
 }

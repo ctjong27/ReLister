@@ -1,18 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Container, Button, Segment } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import { UserFormValues } from "../../app/models/user";
+import { NavBarAuth } from "./NavBarAuth";
+import NavBarUnauth from "./NavBarUnauth";
 
-export const NavBar: React.FC = () => {
+const NavBar: React.FC = () => { // 
   
-  const [user, setActivity] = useState(new UserFormValues());
+  const [trigger, setTrigger] = useState<Boolean>(false);
 
-  return (
-    // https://react.semantic-ui.com/collections/menu/#types-basic
+  useEffect(() => {
+    if (true) {
+      setTrigger(true);
+    }
+    else {
+      setTrigger(false)
+    }
+
+  }, []);
     
+  // // if (trigger) { return ''}
 
-  );
+  // var navbar;
+  // if (trigger) {
+  //   navbar = <NavBarAuth /> ;
+  // } else {
+  //   navbar = <NavBarUnauth /> ;
+  // }
+
+  // return (
+  //   {navbar}
+  // );
+
+  var navbar;
+  if (trigger) {
+    return (<NavBarAuth />) ;
+  } else {
+    return (<NavBarUnauth />) ;
+  }
 };
 
 export default observer(NavBar);
