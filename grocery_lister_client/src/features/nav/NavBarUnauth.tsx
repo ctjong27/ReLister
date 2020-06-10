@@ -23,8 +23,8 @@ export const NavBarUnauth: React.FC = () => {
           />
           ReLister
         </Menu.Item>
-        <Menu.Item name="Shopping List" as={NavLink} to="/shopping_list" />
-        <Menu.Item name="Pantry List" as={NavLink} to="/pantry_list" />
+        {/* <Menu.Item name="Shopping List" as={NavLink} to="/shopping_list" />
+        <Menu.Item name="Pantry List" as={NavLink} to="/pantry_list" /> */}
         
         <Menu.Item position="right">
           <Button
