@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import HomePage from "../../features/home/HomePage";
 import NavBar from "../../features/nav/NavBar";
 import { Container } from "semantic-ui-react";
+import ItemDashboard from "../../features/dashboards/ItemDashboard";
 
 function App() {
   return (
@@ -25,11 +26,13 @@ function App() {
               <Switch>
                 {/* <Route exact path="/activities" component={ActivityDashboard} />
                 <Route path="/activities/:id" component={ActivityDetails} /> */}
+                <Route exact path="/shopping_list" component={ItemDashboard} />
+{/* 
                 <Route
-                  // key={location.key}
-                  // path={["/createActivity", "/manage/:id"]}
-                  // component={ActivityForm}
-                />
+                  key={location.key}
+                  path={["/createActivity", "/manage/:id"]}
+                  component={ActivityForm}
+                /> */}
                 {/* <Route component={NotFound} /> */}
               </Switch>
             </Container>

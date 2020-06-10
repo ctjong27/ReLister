@@ -1,34 +1,37 @@
 import { observable, action, computed, configure, runInAction } from 'mobx';
-import { IGroup } from '../models/group';
+import { IUser } from '../models/user';
+import { createContext } from 'react';
 
 // turning on strict mode for MobX
 configure({ enforceActions: 'always' });
 
-class GroupStore {
+class UserStore {
 
-    @observable groupRegistry = new Map(); // allows changed map or new entries to refresh everything
-    @observable group: IGroup | null = null;
+    @observable userRegistry = new Map(); // allows changed map or new entries to refresh everything
+    @observable user: IUser | null = null;
     //   @observable loadingInitial = false;
     //   @observable submitting = false;
     //   @observable target = '';
 
-    @computed get activitiesByDate() {
-        console.log(this.groupActivitiesByDate(Array.from(this.groupRegistry.values())));
-        return this.groupActivitiesByDate(Array.from(this.groupRegistry.values()));
+    @computed get usersByDate() {
+        console.log(this.groupUsersByDate(Array.from(this.userRegistry.values())));
+        return this.groupUsersByDate(Array.from(this.userRegistry.values()));
     }
 
-    groupActivitiesByDate(groups: IGroup[]) {
-        const sortedActivities = groups.sort(
+    groupUsersByDate(users: IUser[]) {
+        const sortedUsers = users.sort(
           (a, b) => a.date.getTime() - b.date.getTime()
         )
 
-        return Object.entries(sortedActivities.reduce((activities, activity) => {
-          const date = activity.date.toISOString().split('T')[0];
-          activities[date] = activities[date] ? [...activities[date], activity] : [activity];
-          return activities;
+        return Object.entries(sortedUsers.reduce((users, user) => {
+          const date = user.date.toISOString().split('T')[0];
+          users[date] = users[date] ? [...users[date], user] : [user];
+          return users;
         },
 
-        {} as { [key: string]: IGroup[] }));
+        {} as { [key: string]: IUser[] }));
       }
     
 }
+
+export default createContext(new UserStore());

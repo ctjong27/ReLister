@@ -23,7 +23,7 @@ const HomePage = () => {
     );
   } else {
     homebutton = (
-      <Button as={Link} to="/activities" size="huge" inverted>
+      <Button as={Link} to="/shopping_list" size="huge" inverted>
         View Shopping Cart!
       </Button>
     );

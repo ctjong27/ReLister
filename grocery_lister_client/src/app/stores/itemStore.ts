@@ -1,34 +1,37 @@
 import { observable, action, computed, configure, runInAction } from 'mobx';
-import { IGroup } from '../models/group';
+import { IItem } from '../models/item';
+import { createContext } from 'react';
 
 // turning on strict mode for MobX
 configure({ enforceActions: 'always' });
 
-class GroupStore {
+class ItemStore {
 
-    @observable groupRegistry = new Map(); // allows changed map or new entries to refresh everything
-    @observable group: IGroup | null = null;
+    @observable itemRegistry = new Map(); // allows changed map or new entries to refresh everything
+    @observable item: IItem | null = null;
     //   @observable loadingInitial = false;
     //   @observable submitting = false;
     //   @observable target = '';
 
-    @computed get activitiesByDate() {
-        console.log(this.groupActivitiesByDate(Array.from(this.groupRegistry.values())));
-        return this.groupActivitiesByDate(Array.from(this.groupRegistry.values()));
+    @computed get itemsByDate() {
+        console.log(this.groupItemsByDate(Array.from(this.itemRegistry.values())));
+        return this.groupItemsByDate(Array.from(this.itemRegistry.values()));
     }
 
-    groupActivitiesByDate(groups: IGroup[]) {
-        const sortedActivities = groups.sort(
+    groupItemsByDate(items: IItem[]) {
+        const sortedItems = items.sort(
           (a, b) => a.date.getTime() - b.date.getTime()
         )
 
-        return Object.entries(sortedActivities.reduce((activities, activity) => {
-          const date = activity.date.toISOString().split('T')[0];
-          activities[date] = activities[date] ? [...activities[date], activity] : [activity];
-          return activities;
+        return Object.entries(sortedItems.reduce((items, item) => {
+          const date = item.date.toISOString().split('T')[0];
+          items[date] = items[date] ? [...items[date], item] : [item];
+          return items;
         },
 
-        {} as { [key: string]: IGroup[] }));
+        {} as { [key: string]: IItem[] }));
       }
     
 }
+
+export default createContext(new ItemStore());

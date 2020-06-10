@@ -28,13 +28,15 @@ export const NavBarUnauth: React.FC = () => {
         
         <Menu.Item position="right">
           <Button
-            as="a"
+            as={NavLink}
+            to="/log_in"
             // inverted
           >
             Log in
           </Button>
           <Button
-            as="a"
+            as={NavLink}
+            to="/sign_up"
             // inverted
             primary
             style={{ marginLeft: "0.5em" }}

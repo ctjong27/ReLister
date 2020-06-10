@@ -1,5 +1,6 @@
 import { observable, action, computed, configure, runInAction } from 'mobx';
 import { IGroup } from '../models/group';
+import { createContext } from 'react';
 
 // turning on strict mode for MobX
 configure({ enforceActions: 'always' });
@@ -12,23 +13,25 @@ class GroupStore {
     //   @observable submitting = false;
     //   @observable target = '';
 
-    @computed get activitiesByDate() {
-        console.log(this.groupActivitiesByDate(Array.from(this.groupRegistry.values())));
-        return this.groupActivitiesByDate(Array.from(this.groupRegistry.values()));
+    @computed get groupsByDate() {
+        console.log(this.combineGroupsByDate(Array.from(this.groupRegistry.values())));
+        return this.combineGroupsByDate(Array.from(this.groupRegistry.values()));
     }
 
-    groupActivitiesByDate(groups: IGroup[]) {
-        const sortedActivities = groups.sort(
+    combineGroupsByDate(groups: IGroup[]) {
+        const sortedGroups = groups.sort(
           (a, b) => a.date.getTime() - b.date.getTime()
         )
 
-        return Object.entries(sortedActivities.reduce((activities, activity) => {
-          const date = activity.date.toISOString().split('T')[0];
-          activities[date] = activities[date] ? [...activities[date], activity] : [activity];
-          return activities;
+        return Object.entries(sortedGroups.reduce((groups, group) => {
+          const date = group.date.toISOString().split('T')[0];
+          groups[date] = groups[date] ? [...groups[date], group] : [group];
+          return groups;
         },
 
         {} as { [key: string]: IGroup[] }));
       }
     
 }
+
+export default createContext(new GroupStore());
