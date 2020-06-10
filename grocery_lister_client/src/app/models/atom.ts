@@ -1,4 +1,4 @@
-export interface IGroup {
+export interface IAtom {
     id: string;
     name: string;
     title: string;
@@ -9,11 +9,11 @@ export interface IGroup {
     venue: string;
 }
 
-export interface IGroupFormValues extends Partial<IGroup> {
+export interface IAtomFormValues extends Partial<IAtom> {
     time?: Date;
 }
 
-export class GroupFormValues implements IGroupFormValues {
+export class AtomFormValues implements IAtomFormValues {
     id?: string= undefined;
     title: string = "";
     category: string = "";
@@ -23,7 +23,7 @@ export class GroupFormValues implements IGroupFormValues {
     city: string = "";
     venue: string = "";
 
-    constructor(init?: IGroupFormValues) {
+    constructor(init?: IAtomFormValues) {
         if (init && init.date) {
             init.time = init.date
         }

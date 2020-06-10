@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { history } from '../..';
 import { toast } from 'react-toastify';
-import { IGroup } from '../models/group';
+import { IAtom } from '../models/atom';
 import { IUser } from '../models/user';
-import { IItem } from '../models/item';
+import { IMolecule } from '../models/molecule';
 
 axios.defaults.baseURL = 'http://localhost:5000/'; // all api will now use this base url
 
@@ -46,30 +46,30 @@ const requests = {
 }
 
 
-const Items ={
-    list: (): Promise<IItem[]> => requests.get('/items'),
-    details: (name: string) => requests.get(`/group/${name}`),
-    create: (item:IItem) => requests.post('/group', item),
-    update: (item:IItem) => requests.put(`/activities/${item.name}`, item),
-    delete: (name:string) => requests.del(`/activities/${name}`),  
+const Atoms ={
+    list: (): Promise<IAtom[]> => requests.get('/atoms'),
+    details: (name: string) => requests.get(`/atom/${name}`),
+    create: (atom:IAtom) => requests.post('/atom', atom),
+    update: (atom:IAtom) => requests.put(`/atom/${atom.name}`, atom),
+    delete: (name:string) => requests.del(`/atom/${name}`),  
 }
 
-const Groups ={
-    list: (): Promise<IGroup[]> => requests.get('/groups'),
-    details: (name: string) => requests.get(`/group/${name}`),
-    create: (group:IGroup) => requests.post('/group', group),
-    update: (group:IGroup) => requests.put(`/activities/${group.name}`, group),
-    delete: (name:string) => requests.del(`/activities/${name}`),  
+const Molecules ={
+    list: (): Promise<IMolecule[]> => requests.get('/molecules'),
+    details: (name: string) => requests.get(`/molecule/${name}`),
+    create: (molecule:IMolecule) => requests.post('/molecule', molecule),
+    update: (molecule:IMolecule) => requests.put(`/molecule/${molecule.name}`, molecule),
+    delete: (name:string) => requests.del(`/molecule/${name}`),  
 }
 
 const User ={
-    list: (): Promise<IUser[]> => requests.get('/activities'),
-    details: (id: string) => requests.get(`/activities/${id}`),
-    create: (activity:IUser) => requests.post('/activities', activity),
-    update: (activity:IUser) => requests.put(`/activities/${activity.id}`, activity),
-    delete: (id:string) => requests.del(`/activities/${id}`),  
+    list: (): Promise<IUser[]> => requests.get('/users'),
+    details: (id: string) => requests.get(`/user/${id}`),
+    create: (activity:IUser) => requests.post('/user', activity),
+    update: (activity:IUser) => requests.put(`/user/${activity.id}`, activity),
+    delete: (id:string) => requests.del(`/user/${id}`),  
 }
 
 export default {
-    Groups, Items, User
+    Atoms, Molecules, User
 }
