@@ -11,17 +11,16 @@ class UserModel(db.Model):
     password = db.Column(db.String(80))
 
     # Linked Foreign Key
-    items = db.relationship('ItemModel', lazy='dynamic')
-    groups = db.relationship('GroupModel', lazy='dynamic')
+    atoms = db.relationship('AtomModel', lazy='dynamic')
+    molecules = db.relationship('MoleculeModel', lazy='dynamic')
 
     def __init__(self, username, password):
         self.username = username
         self.password = password
 
     def json(self):
-        # return {'name':self.name} # todo: json resturn updates
-        # return {'username':self.username, 'items':[item.json() for item in self.items.all()]} # items.all() is because relationship is lazy=dynamic
-        return {'username':self.username, 'groups':[group.json() for group in self.groups.all()]} # items.all() is because relationship is lazy=dynamic
+        # return {'username':self.username, 'atoms':[atom.json() for item in self.atoms.all()]} # atoms.all() is because relationship is lazy=dynamic
+        return {'username':self.username, 'molecules':[molecule.json() for molecule in self.molecules.all()]} # molecules.all() is because relationship is lazy=dynamic
 
     def save_to_db(self):
         db.session.add(self)

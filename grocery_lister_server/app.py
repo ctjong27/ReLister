@@ -4,8 +4,8 @@ from flask_jwt import JWT
 
 from source.security import authenticate, identity
 from source.resources.user import UserRegister, UserDetail
-from source.resources.group import Group, GroupList
-from source.resources.item import Item, ItemList
+from source.resources.molecule import Molecule, MoleculeList
+from source.resources.atom import Atom, AtomList
 from source.db import db
 
 from datetime import timedelta
@@ -44,10 +44,10 @@ def customized_error_handler(error):
     }), error.status_code
 
 
-api.add_resource(Item, '/item/<string:name>') # https://localhost:5000/student/Rolf
-api.add_resource(ItemList, '/items')
-api.add_resource(Group, '/group/<string:name>')
-api.add_resource(GroupList, '/groups')
+api.add_resource(Atom, '/atom/<string:name>') # https://localhost:5000/student/Rolf
+api.add_resource(AtomList, '/atoms')
+api.add_resource(Molecule, '/molecule/<string:name>')
+api.add_resource(MoleculeList, '/molecules')
 api.add_resource(UserRegister, '/register')
 api.add_resource(UserDetail, '/user/<string:username>')
 

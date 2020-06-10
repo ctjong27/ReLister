@@ -1,26 +1,26 @@
 from source.db import db
 
-class ItemModel(db.Model):
-    # id, group_id, user_id, name, actual_amount, total_amount, unit
+class AtomModel(db.Model):
+    # id, molecule_id, user_id, name, actual_amount, total_amount, unit
 
-    __tablename__ = 'items'
+    __tablename__ = 'atoms'
     
     name = db.Column(db.String(80))
     id = db.Column(db.Integer, primary_key=True)
-    group_id = db.Column(db.Integer, db.ForeignKey('groups.id'), primary_key=True)
+    molecule_id = db.Column(db.Integer, db.ForeignKey('molecule.id'), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     actual_amount = db.Column(db.Float(precision=2))
     total_amount = db.Column(db.Float(precision=2))
     unit = db.Column(db.String(80))
 
     # Foreign Key
-    group = db.relationship('GroupModel')
+    molecule = db.relationship('MoleculeModel')
     user = db.relationship('UserModel')
     
-    def __init__(self, name, group_id, user_id, actual_amount, total_amount, unit):
+    def __init__(self, name, molecule_id, user_id, actual_amount, total_amount, unit):
         self.name = name
         self.id = 1
-        self.group_id = group_id
+        self.molecule_id = molecule_id
         self.user_id = user_id
         self.actual_amount = actual_amount
         self.total_amount = total_amount

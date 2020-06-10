@@ -1,16 +1,16 @@
 from source.db import db
 
-class GroupModel(db.Model):
+class MoleculeModel(db.Model):
     # id, user_id, name
 
-    __tablename__ = 'groups'
+    __tablename__ = 'molecules'
 
     name = db.Column(db.String(80))
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
     # Linked Foreign Key
-    items = db.relationship('ItemModel', lazy='dynamic')
+    atoms = db.relationship('AtomModel', lazy='dynamic')
     
     # Foreign Key
     user = db.relationship('UserModel')
@@ -21,7 +21,7 @@ class GroupModel(db.Model):
         self.user_id = user_id
 
     def json(self):
-        return {'name':self.name, 'items':[item.json() for item in self.items.all()]} # items.all() is because relationship is lazy=dynamic
+        return {'name':self.name, 'atoms':[atom.json() for atom in self.atoms.all()]} # atoms.all() is because relationship is lazy=dynamic
 
     @classmethod
     def find_by_name(cls,name):
