@@ -20,19 +20,6 @@ const NavBar: React.FC = () => { //
 
   }, []);
     
-  // // if (trigger) { return ''}
-
-  // var navbar;
-  // if (trigger) {
-  //   navbar = <NavBarAuth /> ;
-  // } else {
-  //   navbar = <NavBarUnauth /> ;
-  // }
-
-  // return (
-  //   {navbar}
-  // );
-
   var navbar;
   if (trigger) {
     return (<NavBarAuth />) ;

@@ -42,10 +42,6 @@ export const NavBarUnauth: React.FC = () => {
             Sign Up
           </Button>
         </Menu.Item>
-        <Menu.Menu position="right">
-          <Menu.Item name="test" />
-          <Menu.Item name="logout" />
-        </Menu.Menu>
       </Container>
     </Menu>
   );
