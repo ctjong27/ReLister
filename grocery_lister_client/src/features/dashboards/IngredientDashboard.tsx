@@ -4,6 +4,7 @@ import IngredientList from "./IngredientList";
 import { observer } from "mobx-react-lite";
 // import { LoadingComponent } from "../../../app/layout/LoadingComponent";
 import IngredientStore from "../../app/stores/ingredientStore";
+import { LoadingComponent } from "../../app/layout/LoadingComponent";
 
 const IngredientDashboard: React.FC = () => {
   const ingredientStore = useContext(IngredientStore);
@@ -13,8 +14,8 @@ const IngredientDashboard: React.FC = () => {
   }, [ingredientStore]);
 
   // // mobx-react-lite turns react components into observers that detects changes in observables
-  // if (activityStore.loadingInitial)
-  //   return <LoadingComponent content="Loading activities..." />;
+  if (ingredientStore.loadingInitial)
+    return <LoadingComponent content="Loading activities..." />;
 
   return (
     <Grid>

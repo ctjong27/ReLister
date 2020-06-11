@@ -5,7 +5,7 @@ import { IIngredient } from '../models/ingredient';
 import { IUser } from '../models/user';
 import { IRecipe } from '../models/recipe';
 
-axios.defaults.baseURL = 'http://localhost:5000/'; // all api will now use this base url
+axios.defaults.baseURL = 'http://localhost:5000'; // all api will now use this base url
 
 // handle requests
 axios.interceptors.response.use(undefined, error => {

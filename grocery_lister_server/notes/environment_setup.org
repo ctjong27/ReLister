@@ -17,3 +17,6 @@ pip install flask flask-restful flask-jwt Flask-SQLAlchemy
 
 3) Install pylint
 pip install pylint
+
+4) Install flask-cors
+pip install -U flask-cors

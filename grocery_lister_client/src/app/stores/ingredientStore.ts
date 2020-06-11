@@ -39,6 +39,7 @@ class IngredientStore {
     try {
       // this returns result of promise
       const ingredients = await agent.Ingredients.list();
+      console.log("loadIngredients run")
       runInAction('loading activities', () => {
         ingredients.forEach((ingredient) => {
           ingredient.date = new Date(ingredient.date);

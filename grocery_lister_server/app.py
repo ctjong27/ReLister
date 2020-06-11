@@ -2,6 +2,8 @@ from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt import JWT
 
+from flask_cors import CORS, cross_origin
+
 from source.security import authenticate, identity
 from source.resources.user import UserRegister, UserDetail
 from source.resources.recipe import Recipe, RecipeList
@@ -12,6 +14,10 @@ from datetime import timedelta
 import os
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+app.route("/")
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') # if first variable is not found, 2nd is used
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
