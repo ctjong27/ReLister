@@ -1,10 +1,10 @@
 import React from "react";
 import { Item, Button, Segment, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { IAtom } from "../../app/models/atom";
+import { IIngredient } from "../../app/models/ingredient";
 
-export const ActivityListItem: React.FC<{ atom: IAtom }> = ({
-  atom: atom,
+export const ActivityListItem: React.FC<{ ingredient: IIngredient }> = ({
+  ingredient: ingredient,
 }) => {
 
   return (
@@ -15,21 +15,21 @@ export const ActivityListItem: React.FC<{ atom: IAtom }> = ({
           <Item>
             <Item.Image size="tiny" circular src="/assets/user.png" />
             <Item.Content>
-              <Item.Header as="a">{atom.title}</Item.Header>
+              <Item.Header as="a">{ingredient.title}</Item.Header>
               <Item.Description>Hosted by Bob</Item.Description>
             </Item.Content>
           </Item>
         </Item.Group>
       </Segment>
       <Segment>
-        <Icon name="marker" /> {atom.venue}, {atom.city}
+        <Icon name="marker" /> {ingredient.venue}, {ingredient.city}
       </Segment>
       <Segment secondary>Attendees will go here</Segment>
       <Segment clearing>
-        <span>{atom.description}</span>
+        <span>{ingredient.description}</span>
         <Button
           as={Link}
-          to={`/activities/${atom.id}`}
+          to={`/activities/${ingredient.id}`}
           // onClick={() => selectActivity(activity.id)}
           floated="right"
           content="View"

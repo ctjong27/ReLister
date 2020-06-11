@@ -1,17 +1,17 @@
 import React, { useContext, Fragment } from "react";
 import { Item, Label } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
-import { ActivityListItem } from "./AtomListItem";
-import AtomStore from "../../app/stores/atomStore";
+import { ActivityListItem } from "./IngredientListItem";
+import IngredientStore from "../../app/stores/ingredientStore";
 
 // react.fc allows me to pass in parameters as indicated in type
 // OH! React.FC<t> means I get to specify what type is passed in
-const AtomList: React.FC = () => {
-  const atomStore = useContext(AtomStore);
-  const {atomsByDate} = atomStore;
+const IngredientList: React.FC = () => {
+  const ingredientStore = useContext(IngredientStore);
+  const {ingredientsByDate} = ingredientStore;
   return (
     <Fragment>
-      {atomsByDate.map(([group, atoms]) => (
+      {ingredientsByDate.map(([group, ingredients]) => (
         <Fragment key={group} >
           <Label size="large" color="blue">
             {group}
@@ -19,8 +19,8 @@ const AtomList: React.FC = () => {
           {/*  clearing removes any float to prevent flaoting funkiness */}
           {/* adds divider between each item */}
           <Item.Group divided>
-            {atoms.map((atom) => (
-              <ActivityListItem key={atom.id} atom={atom} />
+            {ingredients.map((ingredient) => (
+              <ActivityListItem key={ingredient.id} ingredient={ingredient} />
             ))}
           </Item.Group>
         </Fragment>
@@ -29,4 +29,4 @@ const AtomList: React.FC = () => {
   );
 };
 
-export default observer(AtomList);
+export default observer(IngredientList);

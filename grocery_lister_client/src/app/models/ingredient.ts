@@ -1,4 +1,4 @@
-export interface IMolecule {
+export interface IIngredient {
     id: string;
     name: string;
     title: string;
@@ -9,11 +9,11 @@ export interface IMolecule {
     venue: string;
 }
 
-export interface IMoleculeFormValues extends Partial<IMolecule> {
+export interface IIngredientFormValues extends Partial<IIngredient> {
     time?: Date;
 }
 
-export class MoleculeFormValues implements IMoleculeFormValues {
+export class IngredientFormValues implements IIngredientFormValues {
     id?: string= undefined;
     title: string = "";
     category: string = "";
@@ -23,7 +23,7 @@ export class MoleculeFormValues implements IMoleculeFormValues {
     city: string = "";
     venue: string = "";
 
-    constructor(init?: IMoleculeFormValues) {
+    constructor(init?: IIngredientFormValues) {
         if (init && init.date) {
             init.time = init.date
         }

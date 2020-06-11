@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 import { history } from '../..';
 import { toast } from 'react-toastify';
-import { IAtom } from '../models/atom';
+import { IIngredient } from '../models/ingredient';
 import { IUser } from '../models/user';
-import { IMolecule } from '../models/molecule';
+import { IRecipe } from '../models/recipe';
 
 axios.defaults.baseURL = 'http://localhost:5000/'; // all api will now use this base url
 
@@ -46,19 +46,19 @@ const requests = {
 }
 
 
-const Atoms ={
-    list: (): Promise<IAtom[]> => requests.get('/atoms'),
-    details: (name: string) => requests.get(`/atom/${name}`),
-    create: (atom:IAtom) => requests.post('/atom', atom),
-    update: (atom:IAtom) => requests.put(`/atom/${atom.name}`, atom),
-    delete: (name:string) => requests.del(`/atom/${name}`),  
+const Ingredients ={
+    list: (): Promise<IIngredient[]> => requests.get('/ingredients'),
+    details: (name: string) => requests.get(`/ingredient/${name}`),
+    create: (ingredient:IIngredient) => requests.post('/ingredient', ingredient),
+    update: (ingredient:IIngredient) => requests.put(`/ingredient/${ingredient.name}`, ingredient),
+    delete: (name:string) => requests.del(`/ingredient/${name}`),  
 }
 
-const Molecules ={
-    list: (): Promise<IMolecule[]> => requests.get('/molecules'),
+const Recipes ={
+    list: (): Promise<IRecipe[]> => requests.get('/molecules'),
     details: (name: string) => requests.get(`/molecule/${name}`),
-    create: (molecule:IMolecule) => requests.post('/molecule', molecule),
-    update: (molecule:IMolecule) => requests.put(`/molecule/${molecule.name}`, molecule),
+    create: (molecule:IRecipe) => requests.post('/molecule', molecule),
+    update: (molecule:IRecipe) => requests.put(`/molecule/${molecule.name}`, molecule),
     delete: (name:string) => requests.del(`/molecule/${name}`),  
 }
 
@@ -71,5 +71,5 @@ const User ={
 }
 
 export default {
-    Atoms, Molecules, User
+    Ingredients, Recipes, User
 }

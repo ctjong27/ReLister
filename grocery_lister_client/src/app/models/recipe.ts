@@ -1,4 +1,4 @@
-export interface IAtom {
+export interface IRecipe {
     id: string;
     name: string;
     title: string;
@@ -9,11 +9,11 @@ export interface IAtom {
     venue: string;
 }
 
-export interface IAtomFormValues extends Partial<IAtom> {
+export interface IRecipeFormValues extends Partial<IRecipe> {
     time?: Date;
 }
 
-export class AtomFormValues implements IAtomFormValues {
+export class RecipeFormValues implements IRecipeFormValues {
     id?: string= undefined;
     title: string = "";
     category: string = "";
@@ -23,7 +23,7 @@ export class AtomFormValues implements IAtomFormValues {
     city: string = "";
     venue: string = "";
 
-    constructor(init?: IAtomFormValues) {
+    constructor(init?: IRecipeFormValues) {
         if (init && init.date) {
             init.time = init.date
         }

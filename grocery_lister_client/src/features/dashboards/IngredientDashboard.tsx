@@ -1,16 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { Grid } from "semantic-ui-react";
-import AtomList from "./AtomList";
+import IngredientList from "./IngredientList";
 import { observer } from "mobx-react-lite";
 // import { LoadingComponent } from "../../../app/layout/LoadingComponent";
-import AtomStore from "../../app/stores/atomStore";
+import IngredientStore from "../../app/stores/ingredientStore";
 
 const ActivityDashboard: React.FC = () => {
-  const atomStore = useContext(AtomStore);
+  const ingredientStore = useContext(IngredientStore);
 
   useEffect(() => {
-    atomStore.loadAtoms();
-  }, [atomStore]);
+    ingredientStore.loadIngredients();
+  }, [ingredientStore]);
 
   // // mobx-react-lite turns react components into observers that detects changes in observables
   // if (activityStore.loadingInitial)
@@ -19,7 +19,7 @@ const ActivityDashboard: React.FC = () => {
   return (
     <Grid>
       <Grid.Column width={10}>
-        <AtomList />
+        <IngredientList />
       </Grid.Column>
       <Grid.Column width={6}>
         <h2>Activity filters</h2>
