@@ -8,3 +8,7 @@ to erase group item, entire group should be deleted (or i guess all items, whate
 item > group
 item > user
 group > user
+
+* if adding a recipe under recipe, check box recommended to allow retrieval of ingredients
+
+* do not allow a recipe to add itself

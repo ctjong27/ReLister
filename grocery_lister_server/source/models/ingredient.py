@@ -3,12 +3,12 @@ from source.db import db
 class IngredientModel(db.Model):
     # id, recipe_id, user_id, name, actual_amount, total_amount, unit
 
-    __tablename__ = 'ingredients'
+    __tablename__ = 'ingredient'
     
     name = db.Column(db.String(80))
     id = db.Column(db.Integer, primary_key=True)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     actual_amount = db.Column(db.Float(precision=2))
     total_amount = db.Column(db.Float(precision=2))
     unit = db.Column(db.String(80))

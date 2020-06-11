@@ -3,11 +3,11 @@ from source.db import db
 class RecipeModel(db.Model):
     # id, user_id, name
 
-    __tablename__ = 'recipes'
+    __tablename__ = 'recipe'
 
     name = db.Column(db.String(80))
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
 
     # Linked Foreign Key
     ingredients = db.relationship('IngredientModel', lazy='dynamic')
