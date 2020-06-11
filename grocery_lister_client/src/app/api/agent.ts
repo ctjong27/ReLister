@@ -55,18 +55,18 @@ const Ingredients ={
 }
 
 const Recipes ={
-    list: (): Promise<IRecipe[]> => requests.get('/molecules'),
-    details: (name: string) => requests.get(`/molecule/${name}`),
-    create: (molecule:IRecipe) => requests.post('/molecule', molecule),
-    update: (molecule:IRecipe) => requests.put(`/molecule/${molecule.name}`, molecule),
-    delete: (name:string) => requests.del(`/molecule/${name}`),  
+    list: (): Promise<IRecipe[]> => requests.get('/recipes'),
+    details: (name: string) => requests.get(`/recipe/${name}`),
+    create: (recipe:IRecipe) => requests.post('/recipe', recipe),
+    update: (recipe:IRecipe) => requests.put(`/recipe/${recipe.name}`, recipe),
+    delete: (name:string) => requests.del(`/recipe/${name}`),  
 }
 
 const User ={
     list: (): Promise<IUser[]> => requests.get('/users'),
     details: (id: string) => requests.get(`/user/${id}`),
-    create: (activity:IUser) => requests.post('/user', activity),
-    update: (activity:IUser) => requests.put(`/user/${activity.id}`, activity),
+    create: (user:IUser) => requests.post('/user', user),
+    update: (user:IUser) => requests.put(`/user/${user.id}`, user),
     delete: (id:string) => requests.del(`/user/${id}`),  
 }
 

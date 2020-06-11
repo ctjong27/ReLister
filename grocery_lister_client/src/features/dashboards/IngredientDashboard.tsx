@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 // import { LoadingComponent } from "../../../app/layout/LoadingComponent";
 import IngredientStore from "../../app/stores/ingredientStore";
 
-const ActivityDashboard: React.FC = () => {
+const IngredientDashboard: React.FC = () => {
   const ingredientStore = useContext(IngredientStore);
 
   useEffect(() => {
@@ -22,10 +22,10 @@ const ActivityDashboard: React.FC = () => {
         <IngredientList />
       </Grid.Column>
       <Grid.Column width={6}>
-        <h2>Activity filters</h2>
+        <h2>Ingredient filters</h2>
       </Grid.Column>
     </Grid>
   );
 };
 
-export default observer(ActivityDashboard);
+export default observer(IngredientDashboard);

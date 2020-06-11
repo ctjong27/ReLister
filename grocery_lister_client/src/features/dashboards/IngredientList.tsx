@@ -1,7 +1,7 @@
 import React, { useContext, Fragment } from "react";
 import { Item, Label } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
-import { ActivityListItem } from "./IngredientListItem";
+import { IngredientListItem } from "./IngredientListItem";
 import IngredientStore from "../../app/stores/ingredientStore";
 
 // react.fc allows me to pass in parameters as indicated in type
@@ -20,7 +20,7 @@ const IngredientList: React.FC = () => {
           {/* adds divider between each item */}
           <Item.Group divided>
             {ingredients.map((ingredient) => (
-              <ActivityListItem key={ingredient.id} ingredient={ingredient} />
+              <IngredientListItem key={ingredient.id} ingredient={ingredient} />
             ))}
           </Item.Group>
         </Fragment>

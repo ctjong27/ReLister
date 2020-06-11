@@ -38,11 +38,11 @@ class IngredientStore {
     this.loadingInitial = true;
     try {
       // this returns result of promise
-      const activities = await agent.Ingredients.list();
+      const ingredients = await agent.Ingredients.list();
       runInAction('loading activities', () => {
-        activities.forEach((activity) => {
-          activity.date = new Date(activity.date);
-          this.ingredientRegistry.set(activity.id, activity); // setting map
+        ingredients.forEach((ingredient) => {
+          ingredient.date = new Date(ingredient.date);
+          this.ingredientRegistry.set(ingredient.id, ingredient); // setting map
         });
         this.loadingInitial = false;
       })

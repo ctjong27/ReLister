@@ -3,7 +3,7 @@ import { Item, Button, Segment, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { IIngredient } from "../../app/models/ingredient";
 
-export const ActivityListItem: React.FC<{ ingredient: IIngredient }> = ({
+export const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
   ingredient: ingredient,
 }) => {
 
