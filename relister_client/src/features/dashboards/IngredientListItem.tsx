@@ -4,29 +4,27 @@ import { Link } from "react-router-dom";
 import { IIngredient } from "../../app/models/ingredient";
 
 export const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
-  ingredient: ingredient,
+  ingredient,
 }) => {
-
+  console.log("test")
   return (
     <Segment.Group>
       <Segment>
-        <Item.Group> 
-            {/* item group is required for styling to work correctly for items */}
+        <Item.Group>
           <Item>
-            <Item.Image size="tiny" circular src="/assets/user.png" />
             <Item.Content>
-              <Item.Header as="a">{ingredient.title}</Item.Header>
+              <Item.Header as="a">{ingredient.name}</Item.Header>
               <Item.Description>Hosted by Bob</Item.Description>
             </Item.Content>
           </Item>
         </Item.Group>
       </Segment>
       <Segment>
-        <Icon name="marker" /> {ingredient.venue}, {ingredient.city}
+        <Icon name="marker" /> {ingredient.name}, {ingredient.name}
       </Segment>
       <Segment secondary>Attendees will go here</Segment>
       <Segment clearing>
-        <span>{ingredient.description}</span>
+        <span>{ingredient.name}</span>
         <Button
           as={Link}
           to={`/activities/${ingredient.id}`}

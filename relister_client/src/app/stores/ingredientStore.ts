@@ -22,11 +22,11 @@ class IngredientStore {
 
   groupIngredientsByDate(ingredients: IIngredient[]) {
     const sortedIngredients = ingredients.sort(
-      (a, b) => a.date.getTime() - b.date.getTime()
+      (a, b) => a.name.length -  b.name.length
     )
 
     return Object.entries(sortedIngredients.reduce((ingredients, ingredient) => {
-      const date = ingredient.date.toISOString().split('T')[0];
+      const date = ingredient.name
       ingredients[date] = ingredients[date] ? [...ingredients[date], ingredient] : [ingredient];
       return ingredients;
     },
@@ -40,9 +40,12 @@ class IngredientStore {
       // this returns result of promise
       const ingredients = await agent.Ingredients.list();
       console.log("loadIngredients run")
+      console.log(ingredients)
       runInAction('loading activities', () => {
+        // console.log(ingredients[0].actual_amount)
+        // console.log(ingredients[0])
         ingredients.forEach((ingredient) => {
-          ingredient.date = new Date(ingredient.date);
+          console.log("test")
           this.ingredientRegistry.set(ingredient.id, ingredient); // setting map
         });
         this.loadingInitial = false;
