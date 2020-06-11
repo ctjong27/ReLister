@@ -13,10 +13,10 @@ source venv/bin/activate
 deactivate
 
 2) Install Flask, Flask Restful, Flask Jwt, Flask-SQLAlchemy
-pip install flask flask-restful flask-jwt Flask-SQLAlchemy
+pip install flask flask-restful flask-jwt Flask-SQLAlchemy pylint
 
 3) Install pylint
-pip install pylint
+# pip install pylint # done above in 2)
 
 4) Install flask-cors
 pip install -U flask-cors
