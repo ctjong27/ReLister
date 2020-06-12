@@ -12,7 +12,8 @@ export const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
       <Item.Group>
         <Item>
           <Item.Content>
-            <Item.Header>{ingredient.name}{ingredient.actual_amount}{ingredient.user_id} </Item.Header>
+            <Item.Header>{ingredient.name}</Item.Header>
+            <Item.Description>{ingredient.actual_amount} out of {ingredient.total_amount} </Item.Description>
           </Item.Content>
         </Item>
       </Item.Group>

@@ -15,23 +15,25 @@ class IngredientStore {
   //   @observable submitting = false;
   //   @observable target = '';
 
-  @computed get ingredientsByDate() {
-    console.log(this.groupIngredientsByDate(Array.from(this.ingredientRegistry.values())));
-    return this.groupIngredientsByDate(Array.from(this.ingredientRegistry.values()));
+  @computed get ingredientsByRecipe() {
+    console.log(this.groupIngredientsByRecipe(Array.from(this.ingredientRegistry.values())));
+    return this.groupIngredientsByRecipe(Array.from(this.ingredientRegistry.values()));
   }
 
-  groupIngredientsByDate(ingredients: IIngredient[]) {
+  groupIngredientsByRecipe(ingredients: IIngredient[]) {
     const sortedIngredients = ingredients.sort(
-      (a, b) => a.name.length -  b.name.length
+      // (a, b) => a.recipe_id - b.recipe_id
+      (a, b) => parseInt(a.recipe_id) - parseInt(b.recipe_id)
+      // (a, b) => (a.recipe_id).localeCompare(b.recipe_id)
     )
 
     return Object.entries(sortedIngredients.reduce((ingredients, ingredient) => {
-      const date = ingredient.name
-      ingredients[date] = ingredients[date] ? [...ingredients[date], ingredient] : [ingredient];
+      const recipeId = ingredient.recipe_id
+      // if ingredient with recipeId is found, add it to the list, else make an ew list
+      ingredients[recipeId] = ingredients[recipeId] ? [...ingredients[recipeId], ingredient] : [ingredient];
       return ingredients;
     },
-
-      {} as { [key: string]: IIngredient[] }));
+    {} as { [key: string]: IIngredient[] }));
   }
 
   @action loadIngredients = async () => {

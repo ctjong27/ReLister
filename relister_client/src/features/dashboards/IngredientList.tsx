@@ -8,10 +8,11 @@ import IngredientStore from "../../app/stores/ingredientStore";
 // OH! React.FC<t> means I get to specify what type is passed in
 const IngredientList: React.FC = () => {
   const ingredientStore = useContext(IngredientStore);
-  const {ingredientsByDate} = ingredientStore;
+  const {ingredientsByRecipe} = ingredientStore;
+  console.log(ingredientsByRecipe)
   return (
     <Fragment>
-      {ingredientsByDate.map(([group, ingredients]) => (
+      {ingredientsByRecipe.map(([group, ingredients]) => (
         <Fragment key={group} >
           <Label size="large" color="blue">
             {group}
