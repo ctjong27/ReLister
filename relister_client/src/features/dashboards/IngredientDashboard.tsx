@@ -22,9 +22,9 @@ const IngredientDashboard: React.FC = () => {
       <Grid.Column width={10}>
         <IngredientList />
       </Grid.Column>
-      <Grid.Column width={6}>
+      {/* <Grid.Column width={6}>
         <h2>Ingredient filters</h2>
-      </Grid.Column>
+      </Grid.Column> */}
     </Grid>
   );
 };

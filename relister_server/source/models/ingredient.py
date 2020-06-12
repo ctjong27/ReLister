@@ -17,9 +17,9 @@ class IngredientModel(db.Model):
     recipe = db.relationship('RecipeModel')
     user = db.relationship('UserModel')
     
-    def __init__(self, name, recipe_id, user_id, actual_amount, total_amount, unit):
+    def __init__(self, name, id, recipe_id, user_id, actual_amount, total_amount, unit):
         self.name = name
-        self.id = 1
+        self.id = id
         self.recipe_id = recipe_id
         self.user_id = user_id
         self.actual_amount = actual_amount

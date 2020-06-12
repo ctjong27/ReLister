@@ -9,7 +9,14 @@ export const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
   console.log("test")
   return (
     <Segment.Group>
-      <Segment>
+      <Item.Group>
+        <Item>
+          <Item.Content>
+            <Item.Header>{ingredient.name}{ingredient.actual_amount}{ingredient.user_id} </Item.Header>
+          </Item.Content>
+        </Item>
+      </Item.Group>
+      {/* <Segment>
         <Item.Group>
           <Item>
             <Item.Content>
@@ -33,7 +40,7 @@ export const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
           content="View"
           color="blue"
         />
-      </Segment>
+      </Segment> */}
     </Segment.Group>
   );
 };

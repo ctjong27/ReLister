@@ -39,9 +39,11 @@ class IngredientStore {
     try {
       // this returns result of promise
       const ingredients = await agent.Ingredients.list();
+      console.log(ingredients)
       runInAction('loading activities', () => {
         ingredients.forEach((ingredient) => {
-          console.log("test")
+          console.log("ingredient!!")
+          console.log(ingredient)
           this.ingredientRegistry.set(ingredient.id, ingredient); // setting map
         });
         this.loadingInitial = false;
