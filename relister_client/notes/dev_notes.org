@@ -1,0 +1,7 @@
+atoms
+(mole)cules
+polymer - not including this here due to no use for it - user is technically polymer, but using 'user'
+
+update
+
+using names ingredient, recipe, and user for more accurate representation
