@@ -88,4 +88,5 @@ class Ingredient(Resource):
 
 class IngredientList(Resource):
     def get(self):
-        return {'ingredients': [ingredient.json() for ingredient in IngredientModel.query.all()]}
+        # return {'ingredients': [ingredient.json() for ingredient in IngredientModel.query.all()]}
+        return [ingredient.json() for ingredient in IngredientModel.query.all()]

@@ -39,11 +39,7 @@ class IngredientStore {
     try {
       // this returns result of promise
       const ingredients = await agent.Ingredients.list();
-      console.log("loadIngredients run")
-      console.log(ingredients)
       runInAction('loading activities', () => {
-        // console.log(ingredients[0].actual_amount)
-        // console.log(ingredients[0])
         ingredients.forEach((ingredient) => {
           console.log("test")
           this.ingredientRegistry.set(ingredient.id, ingredient); // setting map
