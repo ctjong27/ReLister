@@ -21,7 +21,10 @@ class RecipeModel(db.Model):
         self.user_id = user_id
 
     def json(self):
-        return {'name':self.name, 'ingredients':[ingredient.json() for ingredient in self.ingredients.all()]} # ingredients.all() is because relationship is lazy=dynamic
+        # return {'name':self.name, 'ingredients':[ingredient.json() for ingredient in self.ingredients.all()]} # ingredients.all() is because relationship is lazy=dynamic
+        return {'name':self.name,
+                'id':self.id, 
+                'user_id': self.user_id}
 
     @classmethod
     def find_by_name(cls,name):

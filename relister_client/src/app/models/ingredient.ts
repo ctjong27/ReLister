@@ -9,16 +9,16 @@ export interface IIngredient {
     unit: string;
 }
 
-export interface IIngredientFormValues extends Partial<IIngredient> {
-    time?: Date;
-}
+// export interface IIngredientFormValues extends Partial<IIngredient> {
+//     time?: Date;
+// }
 
-export class IngredientFormValues implements IIngredientFormValues {
-    id: string= "";
-    recipe_id: string = "";
-    user_id: string = "";
-    name: string = "";
-    actual_amount: string = "";
-    total_amount: string = "";
-    unit: string = "";
-}
+// export class IngredientFormValues implements IIngredientFormValues {
+//     id: string= "";
+//     recipe_id: string = "";
+//     user_id: string = "";
+//     name: string = "";
+//     actual_amount: string = "";
+//     total_amount: string = "";
+//     unit: string = "";
+// }

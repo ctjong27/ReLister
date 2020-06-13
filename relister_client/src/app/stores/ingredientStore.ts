@@ -16,7 +16,7 @@ class IngredientStore {
   //   @observable target = '';
 
   @computed get ingredientsByRecipe() {
-    console.log(this.groupIngredientsByRecipe(Array.from(this.ingredientRegistry.values())));
+    // console.log(this.groupIngredientsByRecipe(Array.from(this.ingredientRegistry.values())));
     return this.groupIngredientsByRecipe(Array.from(this.ingredientRegistry.values()));
   }
 
@@ -41,11 +41,8 @@ class IngredientStore {
     try {
       // this returns result of promise
       const ingredients = await agent.Ingredients.list();
-      console.log(ingredients)
       runInAction('loading activities', () => {
         ingredients.forEach((ingredient) => {
-          console.log("ingredient!!")
-          console.log(ingredient)
           this.ingredientRegistry.set(ingredient.id, ingredient); // setting map
         });
         this.loadingInitial = false;

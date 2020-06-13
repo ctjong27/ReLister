@@ -34,6 +34,8 @@ class Recipe(Resource): # extending resource class
 
     def delete(self, name):
         recipe = RecipeModel.find_by_name(name)
+
+        # todo: do not allow the default 1 to be deletable
         if recipe:
             recipe.delete_from_db()
         else:
@@ -43,4 +45,5 @@ class Recipe(Resource): # extending resource class
 
 class RecipeList(Resource):
     def get(self):
-        return {'recipes': [recipe.json() for recipe in RecipeModel.query.all()]}
+        # return {'recipes': [recipe.json() for recipe in RecipeModel.query.all()]}
+        return [recipe.json() for recipe in RecipeModel.query.all()]

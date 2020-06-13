@@ -9,13 +9,12 @@ import IngredientStore from "../../../app/stores/ingredientStore";
 const IngredientList: React.FC = () => {
   const ingredientStore = useContext(IngredientStore);
   const {ingredientsByRecipe} = ingredientStore;
-  console.log(ingredientsByRecipe)
   return (
     <Fragment>
-      {ingredientsByRecipe.map(([group, ingredients]) => (
-        <Fragment key={group} >
+      {ingredientsByRecipe.map(([recipe, ingredients]) => (
+        <Fragment key={recipe} >
           <Label size="large" color="blue">
-            {group}
+            {recipe}
           </Label>
           {/*  clearing removes any float to prevent flaoting funkiness */}
           {/* adds divider between each item */}

@@ -1,8 +1,8 @@
 import { Component } from "react"
 import React from "react"
-import { Button, Icon, Modal } from "semantic-ui-react"
+import { Button, Icon, Modal, ButtonGroup } from "semantic-ui-react"
 
-class AddRecipeView extends Component {
+class NewRecipeDashboard extends Component {
     state = { open: false }
   
     open = () => this.setState({ open: true })
@@ -18,10 +18,14 @@ class AddRecipeView extends Component {
           onClose={this.close}
           size='small'
           trigger={
-            <Button primary icon>
-              Proceed 
+            <ButtonGroup floated='right'>
+              <Button 
+            // primary 
+            icon color='green'>
+              Add New Recipe
               {/* <Icon name='right chevron' /> */}
-            </Button>
+              </Button>
+            </ButtonGroup>
           }
         >
           <Modal.Header>Modal #2</Modal.Header>
@@ -36,4 +40,4 @@ class AddRecipeView extends Component {
     }
   }
 
-export default AddRecipeView
+export default NewRecipeDashboard

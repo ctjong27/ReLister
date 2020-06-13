@@ -24,6 +24,7 @@ class UserRegister(Resource):
 
         user = UserModel(**data)
         user.save_to_db()
+        # todo: register a recipe default for user
 
         return {'message': 'user created successfully'}, 201 # created response
 
