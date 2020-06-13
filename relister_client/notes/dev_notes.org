@@ -5,3 +5,12 @@ polymer - not including this here due to no use for it - user is technically pol
 update
 
 using names ingredient, recipe, and user for more accurate representation
+
+semantic ui notes
+multiple modals for inner view for adding a new group
+when adding a new group, the outer view should update for user to 'add;
+add the 'x' button
+
+https://react.semantic-ui.com/modules/modal/#types-multiple
+
+add item should be basic, no need to store items

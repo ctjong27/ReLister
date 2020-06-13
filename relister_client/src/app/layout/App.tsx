@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import HomePage from "../../features/home/HomePage";
 import NavBar from "../../features/nav/NavBar";
 import { Container } from "semantic-ui-react";
-import IngredientDashboard from "../../features/dashboards/IngredientDashboard";
+import IngredientDashboard from "../../features/views/dashboards/IngredientDashboard";
 
 function App() {
   return (

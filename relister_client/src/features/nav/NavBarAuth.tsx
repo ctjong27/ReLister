@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, Container, Button, Segment, Dropdown } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
+import RecipeList from "../views/lists/RecipeList";
 
 export const NavBarAuth: React.FC = () => {
   return (
@@ -34,13 +35,14 @@ export const NavBarAuth: React.FC = () => {
             </Dropdown.Menu>
           </Dropdown> */}
           <Menu.Item >
-            <Button
+            <RecipeList />
+            {/* <Button
               as="a"
               // inverted
               style={{ marginLeft: "0.5em" }}
             >
               Add Group
-            </Button>
+            </Button> */}
             <Button
               as="a"
               // inverted

@@ -1,8 +1,8 @@
 import React, { useContext, Fragment } from "react";
 import { Item, Label } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
-import { IngredientListItem } from "./IngredientListItem";
-import IngredientStore from "../../app/stores/ingredientStore";
+import { IngredientListItem } from "../listitems/IngredientListItem";
+import IngredientStore from "../../../app/stores/ingredientStore";
 
 // react.fc allows me to pass in parameters as indicated in type
 // OH! React.FC<t> means I get to specify what type is passed in

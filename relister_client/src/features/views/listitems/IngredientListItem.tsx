@@ -1,7 +1,7 @@
 import React from "react";
 import { Item, Button, Segment, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { IIngredient } from "../../app/models/ingredient";
+import { IIngredient } from "../../../app/models/ingredient";
 
 export const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
   ingredient,
