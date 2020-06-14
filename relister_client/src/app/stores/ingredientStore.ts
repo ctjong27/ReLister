@@ -1,8 +1,9 @@
 import { observable, action, computed, configure, runInAction } from 'mobx';
 import { IIngredient } from '../models/ingredient';
-import { createContext } from 'react';
+import { createContext, SyntheticEvent } from 'react';
 import { toast } from 'react-toastify';
 import agent from '../api/agent';
+import { history } from '../..';
 
 // turning on strict mode for MobX
 configure({ enforceActions: 'always' });
@@ -12,8 +13,8 @@ class IngredientStore {
   @observable ingredientRegistry = new Map(); // allows changed map or new entries to refresh everything
   @observable ingredient: IIngredient | null = null;
   @observable loadingInitial = false;
-  //   @observable submitting = false;
-  //   @observable target = '';
+  @observable submitting = false;
+  @observable target = '';
 
   @computed get ingredientsByRecipe() {
     // console.log(this.groupIngredientsByRecipe(Array.from(this.ingredientRegistry.values())));
@@ -33,7 +34,7 @@ class IngredientStore {
       ingredients[recipeId] = ingredients[recipeId] ? [...ingredients[recipeId], ingredient] : [ingredient];
       return ingredients;
     },
-    {} as { [key: string]: IIngredient[] }));
+      {} as { [key: string]: IIngredient[] }));
   }
 
   @action loadIngredients = async () => {
@@ -57,6 +58,107 @@ class IngredientStore {
     }
   };
 
+  @action loadIngredient = async (id: string) => {
+    // user may click into 'view ingredient' or enter url directly
+    let ingredient = this.getIngredient(id);
+    if (ingredient) {
+      this.ingredient = ingredient;
+      // return the promise of ingredient so in IngredientForm, useEffect doesn't need to keep re-runnign when initalIngredient is updated
+      return ingredient;
+    } else {
+      this.loadingInitial = true;
+      try {
+        ingredient = await agent.Ingredients.details(id);
+        runInAction('getting ingredient', () => {
+          ingredient.date = new Date(ingredient.date);
+          this.ingredient = ingredient;
+          // by setting the ingredientRegistry, no need to re-retrieve data we already have
+          this.ingredientRegistry.set(ingredient.id, ingredient); // setting map
+          this.loadingInitial = false;
+        })
+        return ingredient;
+      } catch (error) {
+        runInAction('get ingredient error', () => {
+          this.loadingInitial = false;
+        })
+        // agent throw error
+        toast.error('Problem Submitting Data');
+        console.log(error)
+
+        // throw error;
+        // this erro can be caught in ingredient details page in client
+        // previously ingredient details was used to send to 404 not found, now that is handled in agent.ts after axios return
+      }
+    }
+  }
+
+  @action clearIngredient = () => {
+    this.ingredient = null;
+  }
+
+  getIngredient = (id: string) => {
+    // mobx observable documentaion = get : returns value or undefined if not found
+    return this.ingredientRegistry.get(id);
+  }
+  @action createIngredient = async (ingredient: IIngredient) => {
+    this.submitting = true;
+    try {
+      await agent.Ingredients.create(ingredient);
+      runInAction('creating ingredient', () => {
+        this.ingredientRegistry.set(ingredient.id, ingredient);
+        this.submitting = false;
+      });
+      history.push(`/activities/${ingredient.id}`);
+    }
+    catch (error) {
+      runInAction('create ingredient error', () => {
+        this.submitting = false;
+      })
+      toast.error('Problem Submitting Data');
+      console.log(error);
+    }
+  };
+
+  @action editIngredient = async (ingredient: IIngredient) => {
+    this.submitting = true;
+    try {
+      await agent.Ingredients.update(ingredient);
+      runInAction('editing ingredient', () => {
+        // overriding existing ingredient by using the key & ingredient data
+        this.ingredientRegistry.set(ingredient.id, ingredient);
+        this.ingredient = ingredient;
+        this.submitting = false;
+      });
+      history.push(`/activities/${ingredient.id}`);
+    }
+    catch (error) {
+      runInAction('edit ingredient error', () => {
+        this.submitting = false
+      })
+      toast.error('Problem Submitting Data');
+      console.log(error);
+    }
+  }
+
+  // passing in event that is result of button being clicked
+  @action deleteIngredient = async (event: SyntheticEvent<HTMLButtonElement>, id: string) => {
+    this.submitting = true;
+    this.target = event.currentTarget.name;
+    try {
+      await agent.Ingredients.delete(id);
+      runInAction('deleting ingredient', () => {
+        this.ingredientRegistry.delete(id);
+        this.submitting = false;
+        this.target = '';
+      })
+    } catch (error) {
+      runInAction('delete ingredient error', () => {
+        this.submitting = false;
+        this.target = '';
+      })
+      console.log(error);
+    }
+  }
 }
 
 export default createContext(new IngredientStore());

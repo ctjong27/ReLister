@@ -3,7 +3,7 @@ import { Item, Label, Modal, Button, Header } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { IngredientListItem } from "../listitems/IngredientListItem";
 import RecipeStore from "../../../app/stores/recipeStore";
-import AddRecipe from "./NewRecipeDashboard";
+import NewRecipeDashboard from "./NewRecipeDashboard";
 import RecipeList from "../lists/RecipeList";
 
 const RecipeListDashboard: React.FC = () => {
@@ -27,7 +27,7 @@ const RecipeListDashboard: React.FC = () => {
         </p>
         <p>Is it okay to use this photo?asdf</p> */}
         <Modal.Actions>
-          <AddRecipe />
+          <NewRecipeDashboard />
         </Modal.Actions>
       </Modal.Description>
     </Modal.Content>

@@ -53,3 +53,14 @@ npm install mobx mobx-react-lite
 
 # axios
 npm install axios
+
+# revalidate
+npm install --save revalidate
+npm install @types/revalidate
+
+# uuid
+npm install uuid
+npm install @types/uuid
+
+# react final form
+npm install react-final-form final-form
