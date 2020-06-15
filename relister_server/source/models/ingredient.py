@@ -8,8 +8,7 @@ class IngredientModel(db.Model):
 
     name = db.Column(db.String(80))
     id = db.Column(db.Integer, primary_key=True)
-    recipe_id = db.Column(db.Integer, db.ForeignKey(
-        'recipe.id'), primary_key=True)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     actual_amount = db.Column(db.Float(precision=2))
     total_amount = db.Column(db.Float(precision=2))

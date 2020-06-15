@@ -15,23 +15,12 @@ import NumberInput from "../../app/common/form/NumberInput";
 const validate = combineValidators({
   name: isRequired({message: 'Name is required'}),
   // missing_amount: isRequiredIf({field:cityIsNotEmpty},{message: 'Description needs to be at least 4 characters'}),
+  missing_amount: isRequired({message: 'Missing Amount is required'}),
   actual_amount: isRequired({message: 'Actual Amount is required'}),
   total_amount: isRequired({message: 'Total Amount is required'}),
   unit: isRequired({message: 'Unit is required'}),
-  
 // const composeValidators = (...validators:any) => (value:any) =>
 // validators.reduce((error, validator) => error || validator(value), undefined)
-
-  category: isRequired('Category'),
-  // multiple validations through composeValidators
-  description: composeValidators(
-    isRequired('Description'),
-    // message is config
-    hasLengthGreaterThan(4)({message: 'Description needs to be at least 4 characters'}))(),
-  city: isRequired('City'),
-  venue: isRequired('Venue'),
-  date: isRequired('Date'),
-  time: isRequired('Time'),
 })
 
 const IngredientForm: React.FC = ({
@@ -51,13 +40,12 @@ const IngredientForm: React.FC = ({
   const [loading, setLoading] = useState(false);
 
   const handleFinalFormSubmit = (values: any) => {
-    const { date, time, ...ingredient } = values;
-    // ingredient.date = dateAndTime;
+    const { name, ...ingredient } = values;
 
     if (!ingredient.id) {
       let newIngredient = {
         ...ingredient,
-        id: uuid(), // generates a new guid
+        // id: uuid(), // generates a new guid
       };
       createIngredient(newIngredient);
     } else {
