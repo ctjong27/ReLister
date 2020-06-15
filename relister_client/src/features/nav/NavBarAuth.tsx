@@ -3,6 +3,7 @@ import { Menu, Container, Button, Segment, Dropdown } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import RecipeListDashboard from "../views/dashboards/RecipeListDashboard";
+import NewIngredientDashboard from "../views/dashboards/NewIngredientDashboard";
 
 export const NavBarAuth: React.FC = () => {
   return (
@@ -43,13 +44,14 @@ export const NavBarAuth: React.FC = () => {
             >
               Add Group
             </Button> */}
-            <Button
+            <NewIngredientDashboard />
+            {/* <Button
               as="a"
               // inverted
               style={{ marginLeft: "0.5em" }}
             >
               Add Item
-            </Button>
+            </Button> */}
             <Button
               as="a"
               // inverted

@@ -7,7 +7,14 @@ import { observer } from "mobx-react-lite";
 const NewRecipeDashboard: React.FC = () => {
   
   return (
-  <Modal trigger={<Button>Add New Recipe</Button>}>
+  <Modal trigger=
+    {
+      <Button
+        as="a"
+        style={{ marginLeft: "0.5em" }}
+      >
+        New Recipe
+      </Button>}>
     <Modal.Header>New Recipe Name</Modal.Header>
     <Modal.Content image>
       {/* <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' /> */}
