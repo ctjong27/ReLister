@@ -42,7 +42,7 @@ class IngredientStore {
     try {
       // this returns result of promise
       const ingredients = await agent.Ingredients.list();
-      runInAction('loading activities', () => {
+      runInAction('loading ingredients', () => {
         ingredients.forEach((ingredient) => {
           this.ingredientRegistry.set(ingredient.id, ingredient); // setting map
         });
@@ -50,7 +50,7 @@ class IngredientStore {
       })
     }
     catch (error) {
-      runInAction('load activities error', () => {
+      runInAction('load ingredients error', () => {
         this.loadingInitial = false;
       })
       toast.error('Problem Submitting Data');
@@ -108,7 +108,8 @@ class IngredientStore {
         this.ingredientRegistry.set(ingredient.id, ingredient);
         this.submitting = false;
       });
-      history.push(`/activities/${ingredient.id}`);
+      // history.push(`/ingredient/${ingredient.id}`);
+      history.push(`/ingredient/${ingredient.id}`);
     }
     catch (error) {
       runInAction('create ingredient error', () => {
@@ -129,7 +130,7 @@ class IngredientStore {
         this.ingredient = ingredient;
         this.submitting = false;
       });
-      history.push(`/activities/${ingredient.id}`);
+      history.push(`/ingredient/${ingredient.id}`);
     }
     catch (error) {
       runInAction('edit ingredient error', () => {

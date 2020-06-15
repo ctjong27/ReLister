@@ -45,7 +45,6 @@ const requests = {
     del: (url:string) => axios.delete(url).then(sleep(1000)).then(responseBody),
 }
 
-
 const Ingredients ={
     list: (): Promise<IIngredient[]> => requests.get('/ingredients'),
     details: (name: string) => requests.get(`/ingredient/${name}`),

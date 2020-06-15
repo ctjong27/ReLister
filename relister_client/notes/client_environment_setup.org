@@ -9,7 +9,7 @@ nvm use --lts
 
 3) install react (from a lower level)
 # facebook*create-react-app
-npx create-react-app reactivities_client --use-npm --typescript
+npx create-react-app relister_client --use-npm --typescript
 
 4) install various npm components
 # semantic ui
