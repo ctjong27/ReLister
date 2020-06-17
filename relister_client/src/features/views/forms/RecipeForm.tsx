@@ -4,12 +4,12 @@ import { v4 as uuid } from "uuid";
 import { observer } from "mobx-react-lite";
 import { RouteComponentProps } from "react-router-dom";
 import { combineValidators, isRequired, composeValidators, hasLengthGreaterThan } from "revalidate";
-import RecipeStore from "../../app/stores/recipeStore";
-import { RecipeFormValues } from "../../app/models/recipe";
+import RecipeStore from "../../../app/stores/recipeStore";
+import { RecipeFormValues } from "../../../app/models/recipe";
 import { Form as FinalForm, Field } from "react-final-form";
-import TextInput from "../../app/common/form/TextInput";
-import { SelectInput } from "../../app/common/form/SelectInput";
-import { TextAreaInput } from "../../app/common/form/TextAreaInput";
+import TextInput from "../../../app/common/form/TextInput";
+import { SelectInput } from "../../../app/common/form/SelectInput";
+import { TextAreaInput } from "../../../app/common/form/TextAreaInput";
 
 const validate = combineValidators({
   title: isRequired({message: 'Event title is required'}), // custom message

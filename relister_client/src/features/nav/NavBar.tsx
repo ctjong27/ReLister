@@ -11,7 +11,7 @@ const NavBar: React.FC = () => { //
   const [trigger, setTrigger] = useState<Boolean>(false);
 
   useEffect(() => {
-    if (true) {
+    if (false) {
       setTrigger(true);
     }
     else {

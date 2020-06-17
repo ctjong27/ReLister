@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Modal, Button } from "semantic-ui-react";
 import React from "react";
-import RecipeForm from "../../forms/RecipeForm";
+import RecipeForm from "../forms/RecipeForm";
 import { observer } from "mobx-react-lite";
 
 const NewRecipeDashboard: React.FC = () => {

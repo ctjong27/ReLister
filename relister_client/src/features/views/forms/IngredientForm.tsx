@@ -4,13 +4,13 @@ import { v4 as uuid } from "uuid";
 import { observer } from "mobx-react-lite";
 import { RouteComponentProps } from "react-router-dom";
 import { combineValidators, isRequired, composeValidators, hasLengthGreaterThan, isRequiredIf } from "revalidate";
-import IngredientStore from "../../app/stores/ingredientStore";
-import { IngredientFormValues } from "../../app/models/ingredient";
+import IngredientStore from "../../../app/stores/ingredientStore";
+import { IngredientFormValues } from "../../../app/models/ingredient";
 import { Form as FinalForm, Field } from "react-final-form";
-import TextInput from "../../app/common/form/TextInput";
-import { SelectInput } from "../../app/common/form/SelectInput";
-import { TextAreaInput } from "../../app/common/form/TextAreaInput";
-import NumberInput from "../../app/common/form/NumberInput";
+import TextInput from "../../../app/common/form/TextInput";
+import { SelectInput } from "../../../app/common/form/SelectInput";
+import { TextAreaInput } from "../../../app/common/form/TextAreaInput";
+import NumberInput from "../../../app/common/form/NumberInput";
 
 const validate = combineValidators({
   name: isRequired({message: 'Name is required'}),

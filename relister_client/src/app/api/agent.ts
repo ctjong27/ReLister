@@ -61,7 +61,7 @@ const Recipes ={
     delete: (name:string) => requests.del(`/recipe/${name}`),  
 }
 
-const User ={
+const Users ={
     list: (): Promise<IUser[]> => requests.get('/users'),
     details: (id: string) => requests.get(`/user/${id}`),
     create: (user:IUser) => requests.post('/user', user),
@@ -70,5 +70,5 @@ const User ={
 }
 
 export default {
-    Ingredients, Recipes, User
+    Ingredients, Recipes, Users
 }

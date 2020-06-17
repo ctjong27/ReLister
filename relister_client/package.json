@@ -1,5 +1,5 @@
 {
-  "name": "grocery_lister_client",
+  "name": "relister_client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

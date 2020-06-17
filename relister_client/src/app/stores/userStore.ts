@@ -1,7 +1,8 @@
 import { observable, action, computed, configure, runInAction } from 'mobx';
 import { IUser } from '../models/user';
-import { createContext } from 'react';
+import { createContext, SyntheticEvent } from 'react';
 import agent from '../api/agent';
+import { toast } from 'react-toastify';
 
 // turning on strict mode for MobX
 configure({ enforceActions: 'always' });
@@ -10,6 +11,7 @@ class UserStore {
 
   @observable userRegistry = new Map(); // allows changed map or new entries to refresh everything
   @observable user: IUser | null = null;
+  
   @observable loadingInitial = false;
   @observable submitting = false;
   @observable target = '';
@@ -63,7 +65,7 @@ class UserStore {
         this.user = user;
         this.submitting = false;
       });
-      history.push(`/activities/${user.id}`);
+      // history.push(`/activities/${user.id}`);
     }
     catch (error) {
       runInAction('edit user error', () => {
@@ -82,7 +84,7 @@ class UserStore {
         this.userRegistry.set(user.id, user);
         this.submitting = false;
       });
-      history.push(`/activities/${user.id}`);
+      // history.push(`/activities/${user.id}`);
     }
     catch (error) {
       runInAction('create user error', () => {

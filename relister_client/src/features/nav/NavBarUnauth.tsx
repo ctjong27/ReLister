@@ -2,6 +2,8 @@ import React from "react";
 import { Menu, Container, Button, Segment } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
+import SignUpDashboard from "../views/dashboards/SignUpDashboard";
+import LoginDashboard from "../views/dashboards/LoginDashboard";
 
 export const NavBarUnauth: React.FC = () => {
   return (
@@ -27,22 +29,8 @@ export const NavBarUnauth: React.FC = () => {
         <Menu.Item name="Pantry List" as={NavLink} to="/pantry_list" /> */}
         
         <Menu.Item position="right">
-          <Button
-            as={NavLink}
-            to="/log_in"
-            // inverted
-          >
-            Log in
-          </Button>
-          <Button
-            as={NavLink}
-            to="/sign_up"
-            // inverted
-            primary
-            style={{ marginLeft: "0.5em" }}
-          >
-            Sign Up
-          </Button>
+          <LoginDashboard />
+          <SignUpDashboard />
         </Menu.Item>
       </Container>
     </Menu>
