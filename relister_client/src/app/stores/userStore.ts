@@ -21,9 +21,9 @@ class UserStore {
     return this.userRegistry.get(id);
   }
   
-  @action loadUser = async (id: string) => {
+  @action loginUser = async (username: string) => {
     // user may click into 'view user' or enter url directly
-    let user = this.getUser(id);
+    let user = this.getUser(username);
     if (user) {
       this.user = user;
       // return the promise of user so in UserForm, useEffect doesn't need to keep re-runnign when initalUser is updated
@@ -31,7 +31,7 @@ class UserStore {
     } else {
       this.loadingInitial = true;
       try {
-        user = await agent.Users.details(id);
+        user = await agent.Users.login(user);
         runInAction('getting user', () => {
           user.date = new Date(user.date);
           this.user = user;
@@ -54,6 +54,59 @@ class UserStore {
       }
     }
   }
+  // @action loadUser = async (id: string) => {
+  //   // user may click into 'view user' or enter url directly
+  //   let user = this.getUser(id);
+  //   if (user) {
+  //     this.user = user;
+  //     // return the promise of user so in UserForm, useEffect doesn't need to keep re-runnign when initalUser is updated
+  //     return user;
+  //   } else {
+  //     this.loadingInitial = true;
+  //     try {
+  //       user = await agent.Users.details(id);
+  //       runInAction('getting user', () => {
+  //         user.date = new Date(user.date);
+  //         this.user = user;
+  //         // by setting the userRegistry, no need to re-retrieve data we already have
+  //         this.userRegistry.set(user.id, user); // setting map
+  //         this.loadingInitial = false;
+  //       })
+  //       return user;
+  //     } catch (error) {
+  //       runInAction('get user error', () => {
+  //         this.loadingInitial = false;
+  //       })
+  //       // agent throw error
+  //       toast.error('Problem Submitting Data');
+  //       console.log(error)
+
+  //       // throw error;
+  //       // this erro can be caught in user details page in client
+  //       // previously user details was used to send to 404 not found, now that is handled in agent.ts after axios return
+  //     }
+  //   }
+  // }
+
+  // load user is temporary
+  @action loadUser = async (user: IUser) => {
+    this.submitting = true;
+    try {
+      user = await agent.Users.login(user);
+      runInAction('loading user', () => {
+        this.userRegistry.set(user.id, user);
+        this.submitting = false;
+        console.log(user)
+      });
+    }
+    catch (error) {
+      runInAction('create user error', () => {
+        this.submitting = false;
+      })
+      toast.error('Problem Submitting Data');
+      console.log(error);
+    }
+  };
 
   @action editUser = async (user: IUser) => {
     this.submitting = true;
@@ -76,10 +129,10 @@ class UserStore {
     }
   }
 
-  @action createUser = async (user: IUser) => {
+  @action registerUser = async (user: IUser) => {
     this.submitting = true;
     try {
-      await agent.Users.create(user);
+      await agent.Users.register(user);
       runInAction('creating user', () => {
         this.userRegistry.set(user.id, user);
         this.submitting = false;

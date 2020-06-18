@@ -13,15 +13,15 @@ from source.db import db
 from datetime import timedelta
 import os
 
+# CORS
 app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
-
+# cors = CORS(app)
+CORS(app, support_credentials=True)
+# app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['CORS_HEADERS'] = 'Access-Control-Allow-Origin'
 app.route("/")
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db') # if first variable is not found, 2nd is used
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 app.secret_key = 'secretkey'
 api = Api(app)
 
@@ -31,9 +31,10 @@ def create_tables():
 
 app.config['JWT_AUTH_URL_RULE'] = '/login' # sets the /auth to /login
 app.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)
-app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
+# app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
+app.config['JWT_AUTH_USERNAME_KEY'] = 'username'
 
-jwt = JWT(app, authenticate, identity) 
+jwt = JWT(app, authenticate, identity)
 
 @jwt.auth_response_handler
 def customized_response_handler(access_token, identity):

@@ -62,8 +62,11 @@ const Recipes ={
 }
 
 const Users ={
+    register: (user:IUser) => requests.post('/register', user),
+    login: (user:IUser) => requests.post('/login', {username:user.username,password:user.password}),
+    
     list: (): Promise<IUser[]> => requests.get('/users'),
-    details: (id: string) => requests.get(`/user/${id}`),
+    // details: (id: string) => requests.get(`/user/${id}`),
     create: (user:IUser) => requests.post('/user', user),
     update: (user:IUser) => requests.put(`/user/${user.id}`, user),
     delete: (id:string) => requests.del(`/user/${id}`),  

@@ -8,7 +8,7 @@ import SignUpForm from "../forms/SignUpForm";
 const SignUpDashboard: React.FC = () => {
   
   return (
-  <Modal trigger=
+  <Modal closeIcon trigger=
     {
       <Button
         as="a"

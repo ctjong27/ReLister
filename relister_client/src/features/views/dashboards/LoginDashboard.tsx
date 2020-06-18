@@ -8,7 +8,7 @@ import LoginForm from "../forms/LoginForm";
 const LoginDashboard: React.FC = () => {
   
   return (
-  <Modal trigger=
+  <Modal closeIcon trigger=
     {
       <Button
         as="a"

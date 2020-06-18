@@ -9,85 +9,68 @@ import {
   composeValidators,
   hasLengthGreaterThan,
 } from "revalidate";
-import RecipeStore from "../../../app/stores/recipeStore";
-import { RecipeFormValues } from "../../../app/models/recipe";
+import UserStore from "../../../app/stores/userStore";
+import { UserFormValues } from "../../../app/models/user";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../app/common/form/TextInput";
 import { SelectInput } from "../../../app/common/form/SelectInput";
 import { TextAreaInput } from "../../../app/common/form/TextAreaInput";
 
 const validate = combineValidators({
-  title: isRequired({ message: "Event title is required" }), // custom message
-  category: isRequired("Category"),
-  // multiple validations through composeValidators
-  description: composeValidators(
-    isRequired("Description"),
-    // message is config
-    hasLengthGreaterThan(4)({
-      message: "Description needs to be at least 4 characters",
-    })
-  )(),
-  city: isRequired("City"),
-  venue: isRequired("Venue"),
-  date: isRequired("Date"),
-  time: isRequired("Time"),
+  username: isRequired("Username"),
+  password: isRequired("Password"),
 });
 
-// interface DetailParams {
-//   id: string;
-// }
-
-// const RecipeForm: React.FC<RouteComponentProps<DetailParams>> = ({
-const SignUpForm: React.FC = ({}) => {
-  const recipeStore = useContext(RecipeStore);
+// const UserForm: React.FC<RouteComponentProps<DetailParams>> = ({
+const LoginForm: React.FC = ({}) => {
+  const userStore = useContext(UserStore);
   const {
-    createRecipe,
-    editRecipe,
+    loginUser,
+    loadUser,
+    editUser,
     submitting,
-    // recipe: initialFormState,
-    loadRecipe,
-    // clearRecipe,
-  } = recipeStore;
+    // user: initialFormState,
+    // clearUser,
+  } = userStore;
 
-  const [recipe, setRecipe] = useState(new RecipeFormValues());
+  const [user, setUser] = useState(new UserFormValues());
 
   const [loading, setLoading] = useState(false);
 
   const handleFinalFormSubmit = (values: any) => {
-    const { date, time, ...recipe } = values;
-    // recipe.date = dateAndTime;
+    const { date, time, ...user } = values;
+    // user.date = dateAndTime;
 
-    if (!recipe.id) {
-      let newRecipe = {
-        ...recipe,
-        id: uuid(), // generates a new guid
-      };
-      createRecipe(newRecipe);
-    } else {
-      editRecipe(recipe);
-    }
+    loadUser(user);
+    // if (!user.id) {
+    //   let newUser = {
+    //     ...user,
+    //     // id: uuid(), // generates a new guid
+    //   };
+    //   loginUser(newUser);
+    // } else {
+    //   editUser(user);
+    // }
   };
 
   return (
-    // <Grid>
-    //   <Grid.Column width={10}>
     <Segment clearing>
       <FinalForm
         validate={validate}
-        initialValues={recipe}
+        initialValues={user}
         onSubmit={handleFinalFormSubmit}
         render={({ handleSubmit, invalid, pristine }) => (
           <Form onSubmit={handleSubmit} loading={loading}>
             <Field
               name="username"
               placeholder="Username"
-              value={recipe.name}
+              value={user.username}
               component={TextInput}
             />
             <Field
               name="password"
               placeholder="Password"
-              value={recipe.name}
+              value={user.username}
               component={TextInput}
             />
             <Button
@@ -99,17 +82,6 @@ const SignUpForm: React.FC = ({}) => {
               content="Submit"
               disabled={loading || pristine || invalid}
             />
-            {/* <Button
-                  onClick={
-                    recipe.id
-                      ? () => history.push(`/activities/${recipe.id}`)
-                      : () => history.push(`/activities`)
-                  }
-                  floated="right"
-                  type="button"
-                  content="Cancel"
-                  disabled={loading}
-                /> */}
           </Form>
         )}
       />
@@ -117,4 +89,4 @@ const SignUpForm: React.FC = ({}) => {
   );
 };
 
-export default observer(SignUpForm);
+export default observer(LoginForm);
