@@ -26,7 +26,7 @@ const LoginForm: React.FC = ({}) => {
   const userStore = useContext(UserStore);
   const {
     loginUser,
-    loadUser,
+    // loadUser,
     editUser,
     submitting,
     // user: initialFormState,
@@ -41,7 +41,7 @@ const LoginForm: React.FC = ({}) => {
     const { date, time, ...user } = values;
     // user.date = dateAndTime;
 
-    loadUser(user);
+    loginUser(user);
     // if (!user.id) {
     //   let newUser = {
     //     ...user,

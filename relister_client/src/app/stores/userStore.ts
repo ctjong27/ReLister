@@ -16,12 +16,15 @@ class UserStore {
   @observable submitting = false;
   @observable target = '';
 
+  @observable loggedIn = false;
+
   getUser = (id: string) => {
     // mobx observable documentaion = get : returns value or undefined if not found
     return this.userRegistry.get(id);
   }
   
-  @action loginUser = async (username: string) => {
+  // loadUser pending erase
+  @action loadUser = async (username: string) => {
     // user may click into 'view user' or enter url directly
     let user = this.getUser(username);
     if (user) {
@@ -54,49 +57,16 @@ class UserStore {
       }
     }
   }
-  // @action loadUser = async (id: string) => {
-  //   // user may click into 'view user' or enter url directly
-  //   let user = this.getUser(id);
-  //   if (user) {
-  //     this.user = user;
-  //     // return the promise of user so in UserForm, useEffect doesn't need to keep re-runnign when initalUser is updated
-  //     return user;
-  //   } else {
-  //     this.loadingInitial = true;
-  //     try {
-  //       user = await agent.Users.details(id);
-  //       runInAction('getting user', () => {
-  //         user.date = new Date(user.date);
-  //         this.user = user;
-  //         // by setting the userRegistry, no need to re-retrieve data we already have
-  //         this.userRegistry.set(user.id, user); // setting map
-  //         this.loadingInitial = false;
-  //       })
-  //       return user;
-  //     } catch (error) {
-  //       runInAction('get user error', () => {
-  //         this.loadingInitial = false;
-  //       })
-  //       // agent throw error
-  //       toast.error('Problem Submitting Data');
-  //       console.log(error)
 
-  //       // throw error;
-  //       // this erro can be caught in user details page in client
-  //       // previously user details was used to send to 404 not found, now that is handled in agent.ts after axios return
-  //     }
-  //   }
-  // }
-
-  // load user is temporary
-  @action loadUser = async (user: IUser) => {
+  @action loginUser = async (user: IUser) => {
     this.submitting = true;
     try {
       user = await agent.Users.login(user);
       runInAction('loading user', () => {
         this.userRegistry.set(user.id, user);
         this.submitting = false;
-        console.log(user)
+        console.log(user);
+        this.loggedIn = true;
       });
     }
     catch (error) {

@@ -33,7 +33,6 @@ const SignUpForm: React.FC = ({}) => {
   } = userStore;
 
   const [user, setUser] = useState(new UserFormValues());
-
   const [loading, setLoading] = useState(false);
 
   const handleFinalFormSubmit = (values: any) => {
