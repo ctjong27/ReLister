@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import RecipeListDashboard from "../views/dashboards/RecipeListDashboard";
 import NewIngredientDashboard from "../views/dashboards/NewIngredientDashboard";
+import SignoutDashboard from "../views/dashboards/SignoutDashboard";
 
 export const NavBarAuth: React.FC = () => {
   return (
@@ -60,6 +61,7 @@ export const NavBarAuth: React.FC = () => {
             >
               Sign Out
             </Button>
+            <SignoutDashboard />
           </Menu.Item>
         </Menu.Menu>
       </Container>

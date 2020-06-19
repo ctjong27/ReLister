@@ -22,7 +22,7 @@ const validate = combineValidators({
 });
 
 // const UserForm: React.FC<RouteComponentProps<DetailParams>> = ({
-const LoginForm: React.FC = () => {
+const LoginForm: React.FC = ({}) => {
   const userStore = useContext(UserStore);
   const {
     loginUser,

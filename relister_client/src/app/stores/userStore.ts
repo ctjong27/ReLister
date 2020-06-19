@@ -23,41 +23,6 @@ class UserStore {
     return this.userRegistry.get(id);
   }
   
-  // loadUser pending erase
-  @action loadUser = async (username: string) => {
-    // user may click into 'view user' or enter url directly
-    let user = this.getUser(username);
-    if (user) {
-      this.user = user;
-      // return the promise of user so in UserForm, useEffect doesn't need to keep re-runnign when initalUser is updated
-      return user;
-    } else {
-      this.loadingInitial = true;
-      try {
-        user = await agent.Users.login(user);
-        runInAction('getting user', () => {
-          user.date = new Date(user.date);
-          this.user = user;
-          // by setting the userRegistry, no need to re-retrieve data we already have
-          this.userRegistry.set(user.id, user); // setting map
-          this.loadingInitial = false;
-        })
-        return user;
-      } catch (error) {
-        runInAction('get user error', () => {
-          this.loadingInitial = false;
-        })
-        // agent throw error
-        toast.error('Problem Submitting Data');
-        console.log(error)
-
-        // throw error;
-        // this erro can be caught in user details page in client
-        // previously user details was used to send to 404 not found, now that is handled in agent.ts after axios return
-      }
-    }
-  }
-
   @action loginUser = async (user: IUser) => {
     this.submitting = true;
     try {
@@ -65,8 +30,31 @@ class UserStore {
       runInAction('loading user', () => {
         this.userRegistry.set(user.id, user);
         this.submitting = false;
-        console.log(user);
+        this.user = user
+        console.log(this.user);
         this.loggedIn = true;
+      });
+    }
+    catch (error) {
+      runInAction('create user error', () => {
+        this.submitting = false;
+      })
+      toast.error('Problem Submitting Data');
+      console.log(error);
+    }
+  };
+
+  @action signoutUser = async () => {
+    this.submitting = true;
+    this.user = {id:"", username:"", password:""};
+    try {
+      // user = await agent.Users.login(user);
+      runInAction('signout user', () => {
+        
+        
+        this.submitting = false;
+        console.log(this.user);
+        this.loggedIn = false;
       });
     }
     catch (error) {

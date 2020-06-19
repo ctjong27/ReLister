@@ -14,3 +14,14 @@ add the 'x' button
 https://react.semantic-ui.com/modules/modal/#types-multiple
 
 add item should be basic, no need to store items
+
+* 06-18-2020
+add sign out functionality
+will need logic to maintain 'active' ingredients
+
+there already is a table for ingredients, so maybe active_ingredients or rename existing table as group_ingredients
+
+not entirely sure
+probably 1st is the better choice for consistency
+
+next logical thing would be to implement group add with user registration data
