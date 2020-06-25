@@ -3,6 +3,7 @@ import { IUser } from '../models/user';
 import { createContext, SyntheticEvent } from 'react';
 import agent from '../api/agent';
 import { toast } from 'react-toastify';
+import Cookies from 'universal-cookie';
 
 // turning on strict mode for MobX
 configure({ enforceActions: 'always' });
@@ -11,7 +12,7 @@ class UserStore {
 
   @observable userRegistry = new Map(); // allows changed map or new entries to refresh everything
   @observable user: IUser | null = null;
-  
+
   @observable loadingInitial = false;
   @observable submitting = false;
   @observable target = '';
@@ -22,9 +23,10 @@ class UserStore {
     // mobx observable documentaion = get : returns value or undefined if not found
     return this.userRegistry.get(id);
   }
-  
+
   @action loginUser = async (user: IUser) => {
     this.submitting = true;
+    // if (user.access_token === '') {
     try {
       user = await agent.Users.login(user);
       runInAction('loading user', () => {
@@ -33,6 +35,12 @@ class UserStore {
         this.user = user
         console.log(this.user);
         this.loggedIn = true;
+        const cookies = new Cookies();
+        // cookies.set('myCat', 'Pacman', { path: '/' });
+        cookies.set('jwt', user.access_token);
+        cookies.set('id', user.id);
+        console.log(JSON.stringify(user))
+        // localStorage.setItem('usr', JSON.stringify(user))
       });
     }
     catch (error) {
@@ -42,19 +50,25 @@ class UserStore {
       toast.error('Problem Submitting Data');
       console.log(error);
     }
+    // }
+    // else {
+
+    // }
   };
 
   @action signoutUser = async () => {
     this.submitting = true;
-    this.user = {id:"", username:"", password:""};
+    this.user = { id: "", username: "", password: "", access_token: "" };
     try {
       // user = await agent.Users.login(user);
       runInAction('signout user', () => {
-        
-        
         this.submitting = false;
         console.log(this.user);
         this.loggedIn = false;
+
+        const cookies = new Cookies();
+        cookies.remove('jwt')
+        cookies.remove('id')
       });
     }
     catch (error) {

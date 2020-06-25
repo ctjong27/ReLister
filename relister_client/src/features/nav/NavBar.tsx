@@ -6,6 +6,8 @@ import { UserFormValues } from "../../app/models/user";
 import { NavBarAuth } from "./NavBarAuth";
 import NavBarUnauth from "./NavBarUnauth";
 import UserStore from "../../app/stores/userStore";
+import Cookies from 'universal-cookie';
+import { type } from "os";
 
 const NavBar: React.FC = () => { // 
   
@@ -15,6 +17,9 @@ const NavBar: React.FC = () => { //
   const {
     loggedIn
   } = userStore;
+
+  const cookies = new Cookies();
+  const jwt = cookies.get('jwt')
 
   // useEffect(() => {
   //   if (false) {
@@ -27,8 +32,9 @@ const NavBar: React.FC = () => { //
   // }, []);
     
   var navbar;
-  if (loggedIn) {
-    return (<NavBarAuth />) ;
+  // if (loggedIn) {
+  if (jwt !== null && jwt !== '' && typeof jwt !== 'undefined') {
+      return (<NavBarAuth />) ;
   } else {
     return (<NavBarUnauth />) ;
   }

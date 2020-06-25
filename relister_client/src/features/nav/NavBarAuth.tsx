@@ -53,14 +53,14 @@ export const NavBarAuth: React.FC = () => {
             >
               Add Item
             </Button> */}
-            <Button
+            {/* <Button
               as="a"
               // inverted
               primary
               style={{ marginLeft: "0.5em" }}
             >
               Sign Out
-            </Button>
+            </Button> */}
             <SignoutDashboard />
           </Menu.Item>
         </Menu.Menu>

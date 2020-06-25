@@ -5,6 +5,7 @@ import RecipeForm from "../forms/RecipeForm";
 import { observer } from "mobx-react-lite";
 import LoginForm from "../forms/LoginForm";
 import UserStore from "../../../app/stores/userStore";
+import { NavLink } from "react-router-dom";
 
 const SignoutDashboard: React.FC = () => {
   const userStore = useContext(UserStore);
@@ -26,6 +27,8 @@ const SignoutDashboard: React.FC = () => {
 
   const [model_open, triggerModalView] = useState<boolean>(false);
 
+
+  
   // constructor(props) {
   //   super(props);
 
@@ -48,44 +51,52 @@ const SignoutDashboard: React.FC = () => {
   //     ]}
   //   />
 
-  return(
-  <Modal closeIcon 
-  open={model_open}
-  trigger=
-    {
-      <Button
-        as="a"
-        onClick={() => triggerModalView(true)}
-        style={{ marginLeft: "0.5em" }}
-      >
-        Sign Out
-      </Button>}>
-        
-    <Modal.Header>Sign Out</Modal.Header>
-    <Modal.Content image>
-      <Modal.Description>
-        {/* <LoginForm /> */}
-        
+  return (
+    <Modal
+      closeIcon
+      onClose={() => triggerModalView(false)}
+      open={model_open}
+      // onActionClick={}
+      trigger={
         <Button
           as="a"
-          onClick={() => triggerModalView(false)}
-          style={{ marginLeft: "0.5em" }}>
-        Cancel
-      </Button>
-        <Button
-          as="a"
-          // onClick={() => {
-          //   signoutUser;
-          //   () => triggerModalView(false);
-          // }}
-          onClick={signoutUser}
-          style={{ marginLeft: "0.5em" }}>
-        Yes
-      </Button>
-      </Modal.Description>
-    </Modal.Content>
-  </Modal>
-);
+          onClick={() => triggerModalView(true)}
+          style={{ marginLeft: "0.5em" }}
+        >
+          Sign Out
+        </Button>
+      }
+    >
+      <Modal.Header>Sign Out</Modal.Header>
+      <Modal.Content image>
+        <Modal.Description>
+          {/* <LoginForm /> */}
+
+          <Button
+            as="a"
+            onClick={() => triggerModalView(false)}
+            style={{ marginLeft: "0.5em" }}
+          >
+            Cancel
+          </Button>
+          <Button
+            // as="a"
+            as={NavLink}
+            exact
+            to="/"
+            // onClick={() => {
+            //   signoutUser;
+            //   () => triggerModalView(false);
+            // }}
+            onClick={signoutUser}
+            style={{ marginLeft: "0.5em" }}
+          >
+            Yes
+          </Button>
+        </Modal.Description>
+      </Modal.Content>
+    </Modal>
+  );
 };
 
 export default observer(SignoutDashboard);

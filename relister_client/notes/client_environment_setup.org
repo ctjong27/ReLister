@@ -64,3 +64,6 @@ npm install @types/uuid
 
 # react final form
 npm install react-final-form final-form
+
+# universal-cookie
+npm install universal-cookie
