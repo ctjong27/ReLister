@@ -10,7 +10,6 @@ configure({ enforceActions: 'always' });
 
 class UserStore {
 
-  @observable userRegistry = new Map(); // allows changed map or new entries to refresh everything
   @observable user: IUser | null = null;
 
   @observable loadingInitial = false;
@@ -19,18 +18,12 @@ class UserStore {
 
   @observable loggedIn = false;
 
-  getUser = (id: string) => {
-    // mobx observable documentaion = get : returns value or undefined if not found
-    return this.userRegistry.get(id);
-  }
-
   @action loginUser = async (user: IUser) => {
     this.submitting = true;
     // if (user.access_token === '') {
     try {
       user = await agent.Users.login(user);
       runInAction('loading user', () => {
-        this.userRegistry.set(user.id, user);
         this.submitting = false;
         this.user = user
         console.log(this.user);
@@ -86,7 +79,6 @@ class UserStore {
       await agent.Users.update(user);
       runInAction('editing user', () => {
         // overriding existing user by using the key & user data
-        this.userRegistry.set(user.id, user);
         this.user = user;
         this.submitting = false;
       });
@@ -106,7 +98,6 @@ class UserStore {
     try {
       await agent.Users.register(user);
       runInAction('creating user', () => {
-        this.userRegistry.set(user.id, user);
         this.submitting = false;
       });
       // history.push(`/activities/${user.id}`);
@@ -127,7 +118,6 @@ class UserStore {
     try {
       await agent.Users.delete(id);
       runInAction('deleting user', () => {
-        this.userRegistry.delete(id);
         this.submitting = false;
         this.target = '';
       })

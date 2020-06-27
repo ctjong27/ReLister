@@ -56,7 +56,7 @@ const Ingredients ={
 const Recipes ={
     list: (): Promise<IRecipe[]> => requests.get('/recipes'),
     details: (name: string) => requests.get(`/recipe/${name}`),
-    create: (recipe:IRecipe) => requests.post('/recipe', recipe),
+    create: (name:string, user_id:Object) => requests.post(`/recipe/${name}`, user_id),
     update: (recipe:IRecipe) => requests.put(`/recipe/${recipe.name}`, recipe),
     delete: (name:string) => requests.del(`/recipe/${name}`),  
 }

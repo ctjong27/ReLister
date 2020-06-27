@@ -17,7 +17,7 @@ class RecipeModel(db.Model):
 
     def __init__(self, name, user_id):
         self.name = name
-        self.id = 1
+        self.id = 2
         self.user_id = user_id
 
     def json(self):

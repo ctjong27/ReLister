@@ -59,6 +59,7 @@ const SignoutDashboard: React.FC = () => {
       // onActionClick={}
       trigger={
         <Button
+          primary
           as="a"
           onClick={() => triggerModalView(true)}
           style={{ marginLeft: "0.5em" }}

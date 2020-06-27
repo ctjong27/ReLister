@@ -38,29 +38,7 @@ export const NavBarAuth: React.FC = () => {
           </Dropdown> */}
           <Menu.Item >
             <RecipeListDashboard />
-            {/* <Button
-              as="a"
-              // inverted
-              style={{ marginLeft: "0.5em" }}
-            >
-              Add Group
-            </Button> */}
             <NewIngredientDashboard />
-            {/* <Button
-              as="a"
-              // inverted
-              style={{ marginLeft: "0.5em" }}
-            >
-              Add Item
-            </Button> */}
-            {/* <Button
-              as="a"
-              // inverted
-              primary
-              style={{ marginLeft: "0.5em" }}
-            >
-              Sign Out
-            </Button> */}
             <SignoutDashboard />
           </Menu.Item>
         </Menu.Menu>

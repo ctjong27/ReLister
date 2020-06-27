@@ -8,7 +8,7 @@ class Recipe(Resource): # extending resource class
     parser.add_argument('user_id',
         type=int,
         required=True,
-        help='Every ingredient needs user id'
+        help='Every recipe needs user id'
     )
 
     def get(self, name):
@@ -23,6 +23,9 @@ class Recipe(Resource): # extending resource class
             return {'messsage':'recipe {} already exists'.format(name)}, 400
 
         data = Recipe.parser.parse_args()
+
+        print(name)
+        # print(**data)
 
         recipe = RecipeModel(name, **data)
         try:

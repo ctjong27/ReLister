@@ -30,8 +30,7 @@ const NavBar: React.FC = () => { //
   //   }
 
   // }, []);
-    
-  var navbar;
+
   // if (loggedIn) {
   if (jwt !== null && jwt !== '' && typeof jwt !== 'undefined') {
       return (<NavBarAuth />) ;

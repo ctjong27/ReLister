@@ -3,35 +3,40 @@ import { Segment, Form, Button, Grid } from "semantic-ui-react";
 import { v4 as uuid } from "uuid";
 import { observer } from "mobx-react-lite";
 import { RouteComponentProps } from "react-router-dom";
-import { combineValidators, isRequired, composeValidators, hasLengthGreaterThan } from "revalidate";
+import {
+  combineValidators,
+  isRequired,
+  composeValidators,
+  hasLengthGreaterThan,
+} from "revalidate";
 import RecipeStore from "../../../app/stores/recipeStore";
 import { RecipeFormValues } from "../../../app/models/recipe";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../app/common/form/TextInput";
 import { SelectInput } from "../../../app/common/form/SelectInput";
 import { TextAreaInput } from "../../../app/common/form/TextAreaInput";
+import UserStore from "../../../app/stores/userStore";
 
 const validate = combineValidators({
-  title: isRequired({message: 'Event title is required'}), // custom message
-  category: isRequired('Category'),
-  // multiple validations through composeValidators
-  description: composeValidators(
-    isRequired('Description'),
-    // message is config
-    hasLengthGreaterThan(4)({message: 'Description needs to be at least 4 characters'}))(),
-  city: isRequired('City'),
-  venue: isRequired('Venue'),
-  date: isRequired('Date'),
-  time: isRequired('Time'),
-})
+  // title: isRequired({message: 'Event title is required'}), // custom message
+  // category: isRequired('Category'),
+  // // multiple validations through composeValidators
+  // description: composeValidators(
+  //   isRequired('Description'),
+  //   // message is config
+  //   hasLengthGreaterThan(4)({message: 'Description needs to be at least 4 characters'}))(),
+  // city: isRequired('City'),
+  // venue: isRequired('Venue'),
+  // date: isRequired('Date'),
+  // time: isRequired('Time'),
+});
 
 // interface DetailParams {
 //   id: string;
 // }
 
 // const RecipeForm: React.FC<RouteComponentProps<DetailParams>> = ({
-const RecipeForm: React.FC = ({
-}) => {
+const RecipeForm: React.FC = ({}) => {
   const recipeStore = useContext(RecipeStore);
   const {
     createRecipe,
@@ -41,6 +46,9 @@ const RecipeForm: React.FC = ({
     loadRecipe,
     // clearRecipe,
   } = recipeStore;
+
+  const userStore = useContext(UserStore);
+  const { user } = userStore;
 
   const [recipe, setRecipe] = useState(new RecipeFormValues());
 
@@ -71,7 +79,13 @@ const RecipeForm: React.FC = ({
         ...recipe,
         id: uuid(), // generates a new guid
       };
-      createRecipe(newRecipe);
+      if (user !== null) {
+        // console.log('RecipeForm, user:', user)
+        // console.log('RecipeForm, user.id:', user.id)
+        console.log('RecipeForm, newRecipe:', newRecipe)
+        console.log('RecipeForm, newRecipe.name:', newRecipe.name)
+        createRecipe(newRecipe.name, user.id);
+      }
     } else {
       editRecipe(recipe);
     }
@@ -88,8 +102,8 @@ const RecipeForm: React.FC = ({
             render={({ handleSubmit, invalid, pristine }) => (
               <Form onSubmit={handleSubmit} loading={loading}>
                 <Field
-                  name="title"
-                  placeholder="Title"
+                  name="name"
+                  placeholder="Name"
                   value={recipe.name}
                   component={TextInput}
                 />

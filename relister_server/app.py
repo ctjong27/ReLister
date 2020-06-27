@@ -40,7 +40,7 @@ jwt = JWT(app, authenticate, identity)
 def customized_response_handler(access_token, identity):
     return jsonify({
         'access_token': access_token.decode('utf-8'),
-        'user_id': identity.id
+        'id': identity.id
     })
 
 @jwt.jwt_error_handler

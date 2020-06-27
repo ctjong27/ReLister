@@ -61,6 +61,7 @@ npm install @types/revalidate
 # uuid
 npm install uuid
 npm install @types/uuid
+npm install --save @types/uuid
 
 # react final form
 npm install react-final-form final-form

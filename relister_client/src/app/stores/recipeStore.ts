@@ -101,15 +101,17 @@ class RecipeStore {
     return this.recipeRegistry.get(id);
   }
   
-  @action createRecipe = async (recipe: IRecipe) => {
+  @action createRecipe = async (name: string, user_id: string) => {
     this.submitting = true;
     try {
-      await agent.Recipes.create(recipe);
+      console.log('recipeStore-name:',name)
+      console.log('recipeStore-userid:',user_id)
+      await agent.Recipes.create(name, {'user_id':user_id});
       runInAction('creating recipe', () => {
-        this.recipeRegistry.set(recipe.id, recipe);
+        // this.recipeRegistry.set(recipe.id, recipe);
         this.submitting = false;
       });
-      history.push(`/activities/${recipe.id}`);
+      // history.push(`/activities/${recipe.id}`);
     }
     catch (error) {
       runInAction('create recipe error', () => {
