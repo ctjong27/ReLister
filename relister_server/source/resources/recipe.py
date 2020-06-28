@@ -4,6 +4,7 @@ from source.models.recipe import RecipeModel
 class Recipe(Resource): # extending resource class
 
     # Require the eistence of Parameters
+    # parser gets data from the object passed in
     parser = reqparse.RequestParser()
     parser.add_argument('user_id',
         type=int,
@@ -27,7 +28,8 @@ class Recipe(Resource): # extending resource class
         print(name)
         # print(**data)
 
-        recipe = RecipeModel(name, **data)
+        recipe = RecipeModel(name, data.user_id) # **data)
+
         try:
             recipe.save_to_db()
         except:
@@ -38,7 +40,7 @@ class Recipe(Resource): # extending resource class
     def delete(self, name):
         recipe = RecipeModel.find_by_name(name)
 
-        # todo: do not allow the default 1 to be deletable
+        # todo: do not allow the default 0 to be deletable
         if recipe:
             recipe.delete_from_db()
         else:
