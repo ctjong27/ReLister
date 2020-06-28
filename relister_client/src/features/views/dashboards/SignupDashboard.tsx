@@ -3,9 +3,9 @@ import { Modal, Button } from "semantic-ui-react";
 import React from "react";
 import RecipeForm from "../forms/RecipeForm";
 import { observer } from "mobx-react-lite";
-import SignUpForm from "../forms/SignUpForm";
+import SignupForm from "../forms/SignupForm";
 
-const SignUpDashboard: React.FC = () => {
+const SignupDashboard: React.FC = () => {
   
   return (
   <Modal closeIcon trigger=
@@ -20,11 +20,11 @@ const SignUpDashboard: React.FC = () => {
     <Modal.Header>Sign Up</Modal.Header>
     <Modal.Content image>
       <Modal.Description>
-        <SignUpForm />
+        <SignupForm />
       </Modal.Description>
     </Modal.Content>
   </Modal>
 );
 };
 
-export default observer(SignUpDashboard);
+export default observer(SignupDashboard);

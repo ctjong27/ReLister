@@ -1,43 +1,45 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Modal, Button } from "semantic-ui-react";
 import React from "react";
 import RecipeForm from "../forms/RecipeForm";
 import { observer } from "mobx-react-lite";
 
 const NewRecipeDashboard: React.FC = () => {
-  
+  const [modelIsOpen, triggerModalView] = useState<boolean>(false);
+
   return (
-  <Modal trigger=
-    {
-      <Button
-        as="a"
-        style={{ marginLeft: "0.5em" }}
-      >
-        New Recipe
-      </Button>}>
-    <Modal.Header>New Recipe Name</Modal.Header>
-    <Modal.Content image>
-      {/* <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' /> */}
-      <Modal.Description>
-        <RecipeForm />
-        {/* <Header>Default Profile Image</Header>
+    <Modal
+      onClose={() => triggerModalView(false)}
+      open={modelIsOpen}
+      trigger={
+        <Button 
+          onClick={() => triggerModalView(true)}
+          as="a" style={{ marginLeft: "0.5em" }}>
+          New Recipe
+        </Button>
+      }
+    >
+      <Modal.Header>New Recipe Name</Modal.Header>
+      <Modal.Content image>
+        {/* <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' /> */}
+        <Modal.Description>
+          <RecipeForm modelIsOpen={modelIsOpen} triggerModalView={triggerModalView} />
+          {/* <Header>Default Profile Image</Header>
         <p>
           We've found the followiasdfng gravatar image associated with your e-mail
           address.
         </p>
         <p>Is it okay to use this photo?asdf</p> */}
-        {/* <Modal.Actions>
+          {/* <Modal.Actions>
           <NewRecipeDashboard />
         </Modal.Actions> */}
-      </Modal.Description>
-    </Modal.Content>
-  </Modal>
-);
+        </Modal.Description>
+      </Modal.Content>
+    </Modal>
+  );
 };
 
 export default observer(NewRecipeDashboard);
-
-
 
 // import { Component } from "react";
 // import React from "react";

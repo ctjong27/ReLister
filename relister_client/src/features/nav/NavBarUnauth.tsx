@@ -2,7 +2,7 @@ import React from "react";
 import { Menu, Container, Button, Segment } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
-import SignUpDashboard from "../views/dashboards/SignUpDashboard";
+import SignupDashboard from "../views/dashboards/SignupDashboard";
 import LoginDashboard from "../views/dashboards/LoginDashboard";
 
 export const NavBarUnauth: React.FC = () => {
@@ -30,7 +30,7 @@ export const NavBarUnauth: React.FC = () => {
         
         <Menu.Item position="right">
           <LoginDashboard />
-          <SignUpDashboard />
+          <SignupDashboard />
         </Menu.Item>
       </Container>
     </Menu>

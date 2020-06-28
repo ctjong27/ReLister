@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, SetStateAction, Dispatch } from "react";
 import { Segment, Form, Button, Grid } from "semantic-ui-react";
 import { v4 as uuid } from "uuid";
 import { observer } from "mobx-react-lite";
@@ -36,7 +36,23 @@ const validate = combineValidators({
 // }
 
 // const RecipeForm: React.FC<RouteComponentProps<DetailParams>> = ({
-const RecipeForm: React.FC = ({}) => {
+interface IProps {
+  // color: Color;
+  // triggerModalView: (open: Boolean) => void;
+  // triggerModalView: React.Dispatch<React.SetStateAction<boolean>>;
+  // triggerModalView: (Dispatch<SetStateAction<<Boolean>>) => void;
+  // triggerModalView: (active: boolean) => void;
+  // triggerModalView?: (value: boolean | (prevVar: boolean) => boolean) => void;
+
+  // triggerModalView:any;
+  // [key: string]: any
+  modelIsOpen: boolean;
+  triggerModalView(active: boolean): void;
+  // triggerModalView: (active: boolean) => void;
+}
+
+const RecipeForm: React.FC<IProps> = ({modelIsOpen, triggerModalView}) => {
+
   const recipeStore = useContext(RecipeStore);
   const {
     createRecipe,
@@ -77,18 +93,20 @@ const RecipeForm: React.FC = ({}) => {
     if (!recipe.id) {
       let newRecipe = {
         ...recipe,
-        id: uuid(), // generates a new guid
+        // id: uuid(), // generates a new guid
       };
       if (user !== null) {
         // console.log('RecipeForm, user:', user)
         // console.log('RecipeForm, user.id:', user.id)
         console.log('RecipeForm, newRecipe:', newRecipe)
         console.log('RecipeForm, newRecipe.name:', newRecipe.name)
-        createRecipe(newRecipe.name, user.id);
+        createRecipe(newRecipe, user.id);
       }
     } else {
       editRecipe(recipe);
     }
+
+    triggerModalView(false)
   };
 
   return (

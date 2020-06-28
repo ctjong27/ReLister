@@ -22,7 +22,7 @@ const validate = combineValidators({
 });
 
 // const UserForm: React.FC<RouteComponentProps<DetailParams>> = ({
-const SignUpForm: React.FC = ({}) => {
+const SignupForm: React.FC = ({}) => {
   const userStore = useContext(UserStore);
   const {
     registerUser,
@@ -86,4 +86,4 @@ const SignUpForm: React.FC = ({}) => {
   );
 };
 
-export default observer(SignUpForm);
+export default observer(SignupForm);
