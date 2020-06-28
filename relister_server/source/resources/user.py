@@ -1,6 +1,7 @@
 import sqlite3
 from flask_restful import Resource, reqparse
 from source.models.user import UserModel
+from source.models.recipe import RecipeModel
 
 class UserRegister(Resource):
 
@@ -24,6 +25,11 @@ class UserRegister(Resource):
 
         user = UserModel(**data)
         user.save_to_db()
+        
+        # Initialize default recipe
+        default_recipe = RecipeModel('default', user.id)
+        default_recipe.id = 0
+        RecipeModel.save_to_db(default_recipe)
         # todo: register a recipe default for user
 
         return {'message': 'user created successfully'}, 201 # created response

@@ -18,49 +18,21 @@ import { TextAreaInput } from "../../../app/common/form/TextAreaInput";
 import UserStore from "../../../app/stores/userStore";
 
 const validate = combineValidators({
-  // title: isRequired({message: 'Event title is required'}), // custom message
-  // category: isRequired('Category'),
-  // // multiple validations through composeValidators
-  // description: composeValidators(
-  //   isRequired('Description'),
-  //   // message is config
-  //   hasLengthGreaterThan(4)({message: 'Description needs to be at least 4 characters'}))(),
-  // city: isRequired('City'),
-  // venue: isRequired('Venue'),
   // date: isRequired('Date'),
   // time: isRequired('Time'),
 });
 
-// interface DetailParams {
-//   id: string;
-// }
-
-// const RecipeForm: React.FC<RouteComponentProps<DetailParams>> = ({
 interface IProps {
-  // color: Color;
-  // triggerModalView: (open: Boolean) => void;
-  // triggerModalView: React.Dispatch<React.SetStateAction<boolean>>;
-  // triggerModalView: (Dispatch<SetStateAction<<Boolean>>) => void;
-  // triggerModalView: (active: boolean) => void;
-  // triggerModalView?: (value: boolean | (prevVar: boolean) => boolean) => void;
-
-  // triggerModalView:any;
-  // [key: string]: any
-  modelIsOpen: boolean;
   triggerModalView(active: boolean): void;
-  // triggerModalView: (active: boolean) => void;
 }
 
-const RecipeForm: React.FC<IProps> = ({modelIsOpen, triggerModalView}) => {
+const RecipeForm: React.FC<IProps> = ({triggerModalView}) => {
 
   const recipeStore = useContext(RecipeStore);
   const {
     createRecipe,
     editRecipe,
     submitting,
-    // recipe: initialFormState,
-    loadRecipe,
-    // clearRecipe,
   } = recipeStore;
 
   const userStore = useContext(UserStore);

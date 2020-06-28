@@ -12,9 +12,13 @@ const NewRecipeDashboard: React.FC = () => {
       onClose={() => triggerModalView(false)}
       open={modelIsOpen}
       trigger={
-        <Button 
+        <Button
           onClick={() => triggerModalView(true)}
-          as="a" style={{ marginLeft: "0.5em" }}>
+          floated="right"
+          primary
+          as="a"
+          style={{ marginLeft: "0.5em" }}
+        >
           New Recipe
         </Button>
       }
@@ -23,7 +27,7 @@ const NewRecipeDashboard: React.FC = () => {
       <Modal.Content image>
         {/* <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' /> */}
         <Modal.Description>
-          <RecipeForm modelIsOpen={modelIsOpen} triggerModalView={triggerModalView} />
+          <RecipeForm triggerModalView={triggerModalView} />
           {/* <Header>Default Profile Image</Header>
         <p>
           We've found the followiasdfng gravatar image associated with your e-mail

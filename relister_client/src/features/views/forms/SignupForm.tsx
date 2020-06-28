@@ -21,8 +21,12 @@ const validate = combineValidators({
   password: isRequired("Password"),
 });
 
+interface IProps {
+  signUpSubmitted(): void;
+}
+
 // const UserForm: React.FC<RouteComponentProps<DetailParams>> = ({
-const SignupForm: React.FC = ({}) => {
+const SignupForm: React.FC<IProps> = ({signUpSubmitted}) => {
   const userStore = useContext(UserStore);
   const {
     registerUser,
@@ -48,6 +52,7 @@ const SignupForm: React.FC = ({}) => {
     } else {
       editUser(user);
     }
+    signUpSubmitted();
   };
 
   return (

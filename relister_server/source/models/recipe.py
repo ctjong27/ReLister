@@ -5,9 +5,10 @@ class RecipeModel(db.Model):
 
     __tablename__ = 'recipe'
 
-    name = db.Column(db.String(80))
+    # id = db.Column(db.Integer, db.Sequence("seq_street_segment_id"), primary_key=True)
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    name = db.Column(db.String(80))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))#, primary_key=True)
 
     # Linked Foreign Key
     ingredients = db.relationship('IngredientModel', lazy='dynamic')
@@ -17,13 +18,12 @@ class RecipeModel(db.Model):
 
     def __init__(self, name, user_id):
         self.name = name
-        self.id = 123
         self.user_id = user_id
 
     def json(self):
         # return {'name':self.name, 'ingredients':[ingredient.json() for ingredient in self.ingredients.all()]} # ingredients.all() is because relationship is lazy=dynamic
-        return {'name':self.name,
-                'id':self.id, 
+        return {'id':self.id, 
+                'name':self.name,
                 'user_id': self.user_id}
 
     @classmethod

@@ -9,6 +9,7 @@ import ScrollToTop from "./app/layout/ScrollToTop";
 
 import "./app/layout/styles.css";
 import 'semantic-ui-css/semantic.min.css'
+import 'react-toastify/dist/ReactToastify.min.css';
 
 // import 'react-toastify/dist/ReactToastify.min.css';
 // import 'react-widgets/dist/css/react-widgets.css';

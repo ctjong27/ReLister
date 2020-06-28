@@ -1,5 +1,4 @@
 import sqlite3
-
 from source.db import db
 
 class UserModel(db.Model):

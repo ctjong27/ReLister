@@ -20,7 +20,6 @@ class UserStore {
 
   @action loginUser = async (user: IUser) => {
     this.submitting = true;
-    // if (user.access_token === '') {
     try {
       user = await agent.Users.login(user);
       runInAction('loading user', () => {

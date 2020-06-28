@@ -1,15 +1,14 @@
 from source.db import db
 
-
 class IngredientModel(db.Model):
     # id, recipe_id, user_id, name, actual_amount, total_amount, unit
 
     __tablename__ = 'ingredient'
 
-    name = db.Column(db.String(80))
     id = db.Column(db.Integer, primary_key=True)
-    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    name = db.Column(db.String(80))
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'))#, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))#, primary_key=True)
     actual_amount = db.Column(db.Float(precision=2))
     total_amount = db.Column(db.Float(precision=2))
     unit = db.Column(db.String(80))
@@ -18,9 +17,8 @@ class IngredientModel(db.Model):
     recipe = db.relationship('RecipeModel')
     user = db.relationship('UserModel')
 
-    def __init__(self, name, id, recipe_id, user_id, actual_amount, total_amount, unit):
+    def __init__(self, name, recipe_id, user_id, actual_amount, total_amount, unit):
         self.name = name
-        self.id = id
         self.recipe_id = recipe_id
         self.user_id = user_id
         self.actual_amount = actual_amount
@@ -28,8 +26,8 @@ class IngredientModel(db.Model):
         self.unit = unit
 
     def json(self):
-        return {'name': self.name,
-                'id': self.id,
+        return {'id': self.id,
+                'name': self.name,
                 'recipe_id': self.recipe_id,
                 'user_id': self.user_id,
                 'actual_amount': self.actual_amount,

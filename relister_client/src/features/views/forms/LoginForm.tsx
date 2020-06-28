@@ -26,11 +26,8 @@ const LoginForm: React.FC = () => {
   const userStore = useContext(UserStore);
   const {
     loginUser,
-    // loadUser,
     editUser,
     submitting,
-    // user: initialFormState,
-    // clearUser,
   } = userStore;
 
   const [user, setUser] = useState(new UserFormValues());
