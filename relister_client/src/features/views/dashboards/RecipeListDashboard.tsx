@@ -14,8 +14,8 @@ const RecipeListDashboard: React.FC = () => {
   }, [recipeStore]);
 
   return (
-  <Modal trigger={<Button>Add Group</Button>}>
-    <Modal.Header>Select a Photo</Modal.Header>
+  <Modal trigger={<Button>Add Recipe</Button>}>
+    <Modal.Header>Select a Recipe</Modal.Header>
     <Modal.Content image>
       {/* <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' /> */}
       <Modal.Description>

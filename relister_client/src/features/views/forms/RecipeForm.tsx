@@ -59,7 +59,7 @@ const RecipeForm: React.FC<IProps> = ({triggerModalView}) => {
   // ]);
 
   const handleFinalFormSubmit = (values: any) => {
-    const { date, time, ...recipe } = values;
+    const { ...recipe } = values;
     // recipe.date = dateAndTime;
 
     if (!recipe.id) {
@@ -68,10 +68,6 @@ const RecipeForm: React.FC<IProps> = ({triggerModalView}) => {
         // id: uuid(), // generates a new guid
       };
       if (user !== null) {
-        // console.log('RecipeForm, user:', user)
-        // console.log('RecipeForm, user.id:', user.id)
-        console.log('RecipeForm, newRecipe:', newRecipe)
-        console.log('RecipeForm, newRecipe.name:', newRecipe.name)
         createRecipe(newRecipe, user.id);
       }
     } else {

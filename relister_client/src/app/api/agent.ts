@@ -48,7 +48,8 @@ const requests = {
 const Ingredients ={
     list: (): Promise<IIngredient[]> => requests.get('/ingredients'),
     details: (name: string) => requests.get(`/ingredient/${name}`),
-    create: (ingredient:IIngredient) => requests.post('/ingredient', ingredient),
+    create: (name:string, ingredient:IIngredient) => requests.post(`/ingredient/${name}`, ingredient),
+    // create: (name:string, user_id:Object) => requests.post(`/recipe/${name}`, user_id),
     update: (ingredient:IIngredient) => requests.put(`/ingredient/${ingredient.name}`, ingredient),
     delete: (name:string) => requests.del(`/ingredient/${name}`),  
 }

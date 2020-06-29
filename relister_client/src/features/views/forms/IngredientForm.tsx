@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite";
 import { RouteComponentProps } from "react-router-dom";
 import { combineValidators, isRequired, composeValidators, hasLengthGreaterThan, isRequiredIf } from "revalidate";
 import IngredientStore from "../../../app/stores/ingredientStore";
+import UserStore from "../../../app/stores/userStore";
 import { IngredientFormValues } from "../../../app/models/ingredient";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../app/common/form/TextInput";
@@ -15,7 +16,7 @@ import NumberInput from "../../../app/common/form/NumberInput";
 const validate = combineValidators({
   name: isRequired({message: 'Name is required'}),
   // missing_amount: isRequiredIf({field:cityIsNotEmpty},{message: 'Description needs to be at least 4 characters'}),
-  missing_amount: isRequired({message: 'Missing Amount is required'}),
+  // missing_amount: isRequired({message: 'Missing Amount is required'}),
   actual_amount: isRequired({message: 'Actual Amount is required'}),
   total_amount: isRequired({message: 'Total Amount is required'}),
   unit: isRequired({message: 'Unit is required'}),
@@ -23,34 +24,43 @@ const validate = combineValidators({
 // validators.reduce((error, validator) => error || validator(value), undefined)
 })
 
-const IngredientForm: React.FC = ({
-}) => {
+interface IProps {
+  triggerModalView(active: boolean): void;
+}
+
+const IngredientForm: React.FC<IProps> = ({triggerModalView}) => {
   const ingredientStore = useContext(IngredientStore);
   const {
     createIngredient,
     editIngredient,
     submitting,
     // ingredient: initialFormState,
-    loadIngredient,
     // clearIngredient,
   } = ingredientStore;
+
+  const userStore = useContext(UserStore);
+  const {
+    user
+  } = userStore;
 
   const [ingredient, setIngredient] = useState(new IngredientFormValues());
 
   const [loading, setLoading] = useState(false);
 
   const handleFinalFormSubmit = (values: any) => {
-    const { name, ...ingredient } = values;
+    const { ...ingredient } = values;
 
     if (!ingredient.id) {
       let newIngredient = {
         ...ingredient,
         // id: uuid(), // generates a new guid
       };
-      createIngredient(newIngredient);
+      console.log(newIngredient)
+      createIngredient(newIngredient, '0', user!.id);
     } else {
       editIngredient(ingredient);
     }
+    triggerModalView(false);
   };
 
   return (
@@ -69,13 +79,13 @@ const IngredientForm: React.FC = ({
                   value={ingredient.name}
                   component={TextInput}
                 />
-                <Field
+                {/* <Field
                   name="missing_amount"
                   placeholder="Missing Amount"
                   // value={(parseInt(ingredient.total_amount) - parseInt(ingredient.actual_amount)).toString}
                   value={(parseInt(ingredient.total_amount) - parseInt(ingredient.actual_amount)).toString()}
                   component={NumberInput}
-                />
+                /> */}
                 <Field
                   name="actual_amount"
                   placeholder="Actual Amount"

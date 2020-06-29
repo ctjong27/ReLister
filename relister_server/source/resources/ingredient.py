@@ -6,11 +6,11 @@ class Ingredient(Resource):
     # id, name, recipe_id, actual_amount, total_amount, unit
     
     parser = reqparse.RequestParser()
-    parser.add_argument('id',
-        type=int,
-        required=True,
-        help='Every ingredient needs id'
-    )
+    # parser.add_argument('id',
+    #     type=int,
+    #     required=True,
+    #     help='Every ingredient needs id'
+    # )
     parser.add_argument('recipe_id',
         type=int,
         required=True,

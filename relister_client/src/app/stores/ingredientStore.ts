@@ -100,16 +100,16 @@ class IngredientStore {
     // mobx observable documentaion = get : returns value or undefined if not found
     return this.ingredientRegistry.get(id);
   }
-  @action createIngredient = async (ingredient: IIngredient) => {
+  @action createIngredient = async (ingredient: IIngredient, recipe_id: string, user_id: string) => {
     this.submitting = true;
     try {
-      await agent.Ingredients.create(ingredient);
+      await agent.Ingredients.create(ingredient.name, { ...ingredient, 'recipe_id':recipe_id, 'user_id':user_id});
       runInAction('creating ingredient', () => {
         this.ingredientRegistry.set(ingredient.id, ingredient);
         this.submitting = false;
       });
       // history.push(`/ingredient/${ingredient.id}`);
-      history.push(`/ingredient/${ingredient.id}`);
+      history.push('/shopping_list');
     }
     catch (error) {
       runInAction('create ingredient error', () => {

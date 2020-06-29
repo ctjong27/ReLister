@@ -4,6 +4,7 @@ import { createContext, SyntheticEvent } from 'react';
 import agent from '../api/agent';
 import { toast } from 'react-toastify';
 import Cookies from 'universal-cookie';
+import { history } from '../..';
 
 // turning on strict mode for MobX
 configure({ enforceActions: 'always' });
@@ -33,6 +34,7 @@ class UserStore {
         cookies.set('id', user.id);
         console.log(JSON.stringify(user))
         // localStorage.setItem('usr', JSON.stringify(user))
+        history.push('/shopping_list');
       });
     }
     catch (error) {
