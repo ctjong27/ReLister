@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 import HomePage from "../../features/home/HomePage";
 import NavBar from "../../features/nav/NavBar";
 import { Container } from "semantic-ui-react";
-import IngredientDashboard from "../../features/views/dashboards/IngredientDashboard";
+import IngredientListDashboard from "../../features/views/dashboards/IngredientListDashboard";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
               <Switch>
                 {/* <Route exact path="/activities" component={ActivityDashboard} />
                 <Route path="/activities/:id" component={ActivityDetails} /> */}
-                <Route exact path="/shopping_list" component={IngredientDashboard} />
+                <Route exact path="/shopping_list" component={IngredientListDashboard} />
 {/* 
                 <Route
                   key={location.key}

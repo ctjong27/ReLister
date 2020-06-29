@@ -25,7 +25,7 @@ class Recipe(Resource): # extending resource class
 
         data = Recipe.parser.parse_args()
 
-        print(name)
+        # print(name)
         # print(**data)
 
         recipe = RecipeModel(name, data.user_id) # **data)

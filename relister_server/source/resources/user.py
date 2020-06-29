@@ -26,11 +26,17 @@ class UserRegister(Resource):
         user = UserModel(**data)
         user.save_to_db()
         
-        # Initialize default recipe
-        default_recipe = RecipeModel('default', user.id)
-        default_recipe.id = 0
-        RecipeModel.save_to_db(default_recipe)
-        # todo: register a recipe default for user
+        # Initialize onetime recipe
+        onetime_recipe = RecipeModel('onetime', user.id)
+        onetime_recipe.id = 0
+        onetime_recipe.relist = True
+        RecipeModel.save_to_db(onetime_recipe)
+
+        # Initialize relist recipe
+        relist_recipe = RecipeModel('relist', user.id)
+        relist_recipe.id = 1
+        relist_recipe.relist = False
+        RecipeModel.save_to_db(relist_recipe)
 
         return {'message': 'user created successfully'}, 201 # created response
 

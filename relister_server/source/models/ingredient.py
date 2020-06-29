@@ -6,9 +6,9 @@ class IngredientModel(db.Model):
     __tablename__ = 'ingredient'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'))#, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))#, primary_key=True)
+    name = db.Column(db.String(80))
     actual_amount = db.Column(db.Float(precision=2))
     total_amount = db.Column(db.Float(precision=2))
     unit = db.Column(db.String(80))
@@ -27,9 +27,9 @@ class IngredientModel(db.Model):
 
     def json(self):
         return {'id': self.id,
-                'name': self.name,
                 'recipe_id': self.recipe_id,
                 'user_id': self.user_id,
+                'name': self.name,
                 'actual_amount': self.actual_amount,
                 'total_amount': self.total_amount,
                 'unit': self.unit}

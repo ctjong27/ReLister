@@ -28,12 +28,15 @@ class IngredientStore {
       // (a, b) => (a.recipe_id).localeCompare(b.recipe_id)
     )
 
+    // reduce array to single entry
     return Object.entries(sortedIngredients.reduce((ingredients, ingredient) => {
       const recipeId = ingredient.recipe_id
       // if ingredient with recipeId is found, add it to the list, else make an ew list
       ingredients[recipeId] = ingredients[recipeId] ? [...ingredients[recipeId], ingredient] : [ingredient];
       return ingredients;
     },
+
+      // to end the reduce logic
       {} as { [key: string]: IIngredient[] }));
   }
 
@@ -43,8 +46,9 @@ class IngredientStore {
       // this returns result of promise
       const ingredients = await agent.Ingredients.list();
       runInAction('loading ingredients', () => {
+        console.log(ingredients)
         ingredients.forEach((ingredient) => {
-          this.ingredientRegistry.set(ingredient.id, ingredient); // setting map
+          this.ingredientRegistry.set(ingredient.id, ingredient); // setting map (like a dictionary)
         });
         this.loadingInitial = false;
       })
@@ -61,6 +65,8 @@ class IngredientStore {
   @action loadIngredient = async (id: string) => {
     // user may click into 'view ingredient' or enter url directly
     let ingredient = this.getIngredient(id);
+
+    console.log('loading ingredients')
     if (ingredient) {
       this.ingredient = ingredient;
       // return the promise of ingredient so in IngredientForm, useEffect doesn't need to keep re-runnign when initalIngredient is updated
@@ -103,9 +109,10 @@ class IngredientStore {
   @action createIngredient = async (ingredient: IIngredient, recipe_id: string, user_id: string) => {
     this.submitting = true;
     try {
-      await agent.Ingredients.create(ingredient.name, { ...ingredient, 'recipe_id':recipe_id, 'user_id':user_id});
+      await agent.Ingredients.create(ingredient.name, { ...ingredient, 'recipe_id': recipe_id, 'user_id': user_id });
       runInAction('creating ingredient', () => {
-        this.ingredientRegistry.set(ingredient.id, ingredient);
+        // this.ingredientRegistry.set(ingredient.id, ingredient);
+        this.loadIngredients()
         this.submitting = false;
       });
       // history.push(`/ingredient/${ingredient.id}`);

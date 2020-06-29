@@ -2,21 +2,57 @@ import React from "react";
 import { Item, Button, Segment, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { IIngredient } from "../../../app/models/ingredient";
+import { Form as FinalForm, Field, Form } from "react-final-form";
+import NumberInput from "../../../app/common/form/NumberInput";
 
-export const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
+const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
   ingredient,
 }) => {
-  console.log("test")
+  const handleFinalFormSubmit = (values: any) => {};
+
   return (
     <Segment.Group>
-      <Item.Group>
-        <Item>
-          <Item.Content>
-            <Item.Header>{ingredient.name}</Item.Header>
-            <Item.Description>{ingredient.actual_amount} out of {ingredient.total_amount} </Item.Description>
-          </Item.Content>
-        </Item>
-      </Item.Group>
+        <Item.Group>
+          <Item>
+            <Item.Content>
+              <Item.Header>{ingredient.name}</Item.Header>
+              <Item.Description>
+                {ingredient.actual_amount} out of {ingredient.total_amount}{" "}
+              </Item.Description>
+            </Item.Content>
+          </Item>
+          
+          {/* <FinalForm
+            // validate={validate}
+            initialValues={ingredient}
+            onSubmit={handleFinalFormSubmit}
+            render={({ handleSubmit, invalid, pristine }) => (
+              <Form onSubmit={handleSubmit} 
+              // loading={loading}
+              >
+                  <label>Name</label>
+                  <Field
+                    name="name"
+                    // placeholder="Name"
+                    value={ingredient.name}
+                    component={NumberInput}
+                  />
+                  </Form>
+                  )}
+            /> */}
+        </Item.Group>
+
+      {/* <FinalForm onSubmit={handleFinalFormSubmit}
+      >
+          <Field
+            name="change_amount"
+            // placeholder="Total Amount"
+            component={NumberInput}
+          />
+      </FinalForm> */}
+
+
+      
       {/* <Segment>
         <Item.Group>
           <Item>
@@ -45,3 +81,6 @@ export const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
     </Segment.Group>
   );
 };
+
+
+export { IngredientListItem };

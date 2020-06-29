@@ -11,10 +11,10 @@ const IngredientList: React.FC = () => {
   const {ingredientsByRecipe} = ingredientStore;
   return (
     <Fragment>
-      {ingredientsByRecipe.map(([recipe, ingredients]) => (
-        <Fragment key={recipe} >
+      {ingredientsByRecipe.map(([recipeId, ingredients]) => (
+        <Fragment key={recipeId} >
           <Label size="large" color="blue">
-            {recipe}
+            {recipeId==='0' ? 'One Time Purchase' : 'ReList '}
           </Label>
           {/*  clearing removes any float to prevent flaoting funkiness */}
           {/* adds divider between each item */}

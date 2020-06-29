@@ -9,6 +9,7 @@ class RecipeModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))#, primary_key=True)
+    relist = db.Column(db.Boolean)
 
     # Linked Foreign Key
     ingredients = db.relationship('IngredientModel', lazy='dynamic')
@@ -23,8 +24,9 @@ class RecipeModel(db.Model):
     def json(self):
         # return {'name':self.name, 'ingredients':[ingredient.json() for ingredient in self.ingredients.all()]} # ingredients.all() is because relationship is lazy=dynamic
         return {'id':self.id, 
+                'user_id': self.user_id,
                 'name':self.name,
-                'user_id': self.user_id}
+                'relist':self.relist}
 
     @classmethod
     def find_by_name(cls,name):

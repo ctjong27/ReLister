@@ -31,13 +31,8 @@ export const NavBarAuth: React.FC = () => {
           <Menu.Item name="Pantry List" as={NavLink} to="/pantry_list" />
         </Menu.Menu>
         <Menu.Menu position="right">
-          {/* <Dropdown item text="Add Item">
-            <Dropdown.Menu>
-              <Dropdown.Item>Home</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown> */}
           <Menu.Item >
-            <RecipeListDashboard />
+            {/* <RecipeListDashboard /> */}
             <NewIngredientDashboard />
             <SignoutDashboard />
           </Menu.Item>

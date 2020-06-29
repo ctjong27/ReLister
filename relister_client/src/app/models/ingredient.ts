@@ -7,6 +7,7 @@ export interface IIngredient {
     actual_amount: string;
     total_amount: string;
     unit: string;
+    relist: boolean;
 }
 
 export interface IIngredientFormValues extends Partial<IIngredient> {
@@ -21,6 +22,7 @@ export class IngredientFormValues { //implements IIngredientFormValues {
     actual_amount: string = "";
     total_amount: string = "";
     unit: string = "";
+    relist: boolean = false;
 
     constructor(init?: IIngredientFormValues) {
         
