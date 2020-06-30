@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { IIngredient } from "../../../app/models/ingredient";
 import { Form as FinalForm, Field, Form } from "react-final-form";
 import NumberInput from "../../../app/common/form/NumberInput";
+import BuyIngredientModal from "../modals/BuyIngredientModal";
 
 const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
   ingredient,
@@ -12,17 +13,22 @@ const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
 
   return (
     <Segment.Group>
-        <Item.Group>
-          <Item>
-            <Item.Content>
-              <Item.Header>{ingredient.name}</Item.Header>
-              <Item.Description>
-                {ingredient.actual_amount} out of {ingredient.total_amount}{" "}
-              </Item.Description>
-            </Item.Content>
-          </Item>
-          
-          {/* <FinalForm
+      <Item.Group>
+        <Item>
+          <Item.Content>
+            <Item.Header>{ingredient.name}</Item.Header>
+            <Item.Description>
+              {ingredient.actual_amount} out of {ingredient.total_amount}{" "}
+            </Item.Description>
+          </Item.Content>
+          <BuyIngredientModal ingredientId={ingredient.id} actualAmount={ingredient.actual_amount}/>
+          <Button floated="right" color="orange">
+            Update
+          </Button>
+        </Item>
+      </Item.Group>
+
+        {/* <FinalForm
             // validate={validate}
             initialValues={ingredient}
             onSubmit={handleFinalFormSubmit}
@@ -40,7 +46,6 @@ const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
                   </Form>
                   )}
             /> */}
-        </Item.Group>
 
       {/* <FinalForm onSubmit={handleFinalFormSubmit}
       >
@@ -51,8 +56,6 @@ const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
           />
       </FinalForm> */}
 
-
-      
       {/* <Segment>
         <Item.Group>
           <Item>
@@ -81,6 +84,5 @@ const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
     </Segment.Group>
   );
 };
-
 
 export { IngredientListItem };
