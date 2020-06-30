@@ -4,8 +4,8 @@ export interface IIngredient {
     recipe_id: string;
     user_id: string;
     name: string;
-    actual_amount: string;
-    total_amount: string;
+    actual_amount: number;
+    total_amount: number;
     unit: string;
     relist: boolean;
 }
@@ -19,8 +19,8 @@ export class IngredientFormValues { //implements IIngredientFormValues {
     recipe_id: string = "";
     user_id: string = "";
     name: string = "";
-    actual_amount: string = "";
-    total_amount: string = "";
+    actual_amount: number = 0;
+    total_amount: number = 0;
     unit: string = "";
     relist: boolean = false;
 

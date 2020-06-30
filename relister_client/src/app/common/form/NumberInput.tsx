@@ -3,7 +3,7 @@ import { FieldRenderProps } from "react-final-form";
 import { FormFieldProps, Form, Label } from "semantic-ui-react";
 
 // FieldRenderProps comes in from React Final Form
-interface IProps extends FieldRenderProps<string, HTMLElement>, FormFieldProps {}
+interface IProps extends FieldRenderProps<number, HTMLElement>, FormFieldProps {}
 
 const NumberInput: React.FC<IProps> = ({
   input,

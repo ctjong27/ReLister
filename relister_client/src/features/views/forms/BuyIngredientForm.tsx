@@ -24,44 +24,80 @@ import NumberInput from "../../../app/common/form/NumberInput";
 
 interface IProps {
   triggerModalView(active: boolean): void;
+  ingredientId: string;
+  actualAmount: number;
 }
 
-const IngredientForm: React.FC<IProps> = ({ triggerModalView }) => {
-    
+const BuyIngredientForm: React.FC<IProps> = ({ triggerModalView, ingredientId, actualAmount }) => {
   const ingredientStore = useContext(IngredientStore);
   const userStore = useContext(UserStore);
 
-  const { createIngredient, editIngredient, submitting } = ingredientStore;
+  const { createIngredient, editIngredient, loadIngredient, submitting } = ingredientStore;
   const { user } = userStore;
 
   const [ingredient, setIngredient] = useState(new IngredientFormValues());
   const [loading, setLoading] = useState(false);
 
-  
-  const handleFinalFormSubmit = (values: any) => {
-    const { ...ingredient } = values;
 
-    if (!ingredient.id) {
-      // console.log(newIngredient);
-      let recipeId = ingredient.relist ? "1" : "0";
 
-      let newIngredient: IIngredient = {
-        ...ingredient,
-        recipe_id: recipeId,
-        // id: uuid(), // generates a new guid
-      };
-      createIngredient(newIngredient, recipeId, user!.id);
-    } else {
-      editIngredient(ingredient);
+
+  // we want to run useEffect only when there is an id since component will re-render whenever state is updated
+  useEffect(() => {
+    // 0 length check validates we do not reload if activity is loaded
+    // if (match.params.id && activity.id) {
+    if (ingredientId) {
+      setLoading(true);
+
+      loadIngredient(ingredientId)
+        .then(
+          // () => initialFormState && setActivity(initialFormState)
+          // activity is promise returned from activityStore
+          (ingredient) => setIngredient(new IngredientFormValues(ingredient))
+        )
+        .finally(() => setLoading(false));
     }
-    triggerModalView(false);
+
+    // return () => {
+    //   clearActivity();
+    // };
+  }, [
+    ingredientId,
+    loadIngredient,
+    // clearActivity,
+    // match.params.id,
+    // initialFormState, // remved so the data retrieval doesn't re-run. replaced with retrieval of activity promise
+    // activity.id,
+  ]);
+
+
+
+  const handleFinalFormSubmit = (values: any) => {
+    // const { ...ingredient } = values;
+
+    // if (!ingredient.id) {
+    //   // console.log(newIngredient);
+    //   let recipeId = ingredient.relist ? "1" : "0";
+
+    //   let newIngredient: IIngredient = {
+    //     ...ingredient,
+    //     recipe_id: recipeId,
+    //     // id: uuid(), // generates a new guid
+    //   };
+    //   createIngredient(newIngredient, recipeId, user!.id);
+    // } else {
+    //   editIngredient(ingredient);
+    // }
+    // triggerModalView(false);
   };
 
+
+  console.log('ingredientId', ingredientId)
+  console.log('actualAmount', actualAmount)
   return (
     <Segment clearing>
       <Grid centered>
         <FinalForm
-        //   validate={validate}
+          //   validate={validate}
           initialValues={ingredient}
           onSubmit={handleFinalFormSubmit}
           render={({ handleSubmit, invalid, pristine }) => (
@@ -108,4 +144,4 @@ const IngredientForm: React.FC<IProps> = ({ triggerModalView }) => {
   );
 };
 
-export default observer(IngredientForm);
+export default observer(BuyIngredientForm);

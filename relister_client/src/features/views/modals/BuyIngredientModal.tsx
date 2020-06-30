@@ -8,7 +8,7 @@ import BuyIngredientForm from "../forms/BuyIngredientForm";
 
 interface IProps {
     ingredientId: string;
-    actualAmount: string;
+    actualAmount: number;
   }
 
 const BuyIngredientModal: React.FC<IProps> = ({ingredientId, actualAmount}) => {
@@ -34,7 +34,7 @@ const BuyIngredientModal: React.FC<IProps> = ({ingredientId, actualAmount}) => {
       <Modal.Header>New Ingredient</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-          <BuyIngredientForm triggerModalView={triggerModalView} />
+          <BuyIngredientForm triggerModalView={triggerModalView} ingredientId={ingredientId} actualAmount={actualAmount}/>
         </Modal.Description>
       </Modal.Content>
     </Modal>
