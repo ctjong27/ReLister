@@ -3,7 +3,7 @@ import { Menu, Container, Button, Segment, Dropdown } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import { NavLink } from "react-router-dom";
 import RecipeListDashboard from "../views/dashboards/RecipeListDashboard";
-import NewIngredientDashboard from "../views/dashboards/NewIngredientDashboard";
+import NewIngredientModal from "../views/modals/NewIngredientModal";
 import SignoutDashboard from "../views/dashboards/SignoutDashboard";
 
 export const NavBarAuth: React.FC = () => {
@@ -33,7 +33,7 @@ export const NavBarAuth: React.FC = () => {
         <Menu.Menu position="right">
           <Menu.Item >
             {/* <RecipeListDashboard /> */}
-            <NewIngredientDashboard />
+            <NewIngredientModal />
             <SignoutDashboard />
           </Menu.Item>
         </Menu.Menu>

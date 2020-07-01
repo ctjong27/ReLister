@@ -12,7 +12,10 @@ import {
 } from "revalidate";
 import IngredientStore from "../../../app/stores/ingredientStore";
 import UserStore from "../../../app/stores/userStore";
-import { IngredientFormValues, IIngredient } from "../../../app/models/ingredient";
+import {
+  IngredientFormValues,
+  IIngredient,
+} from "../../../app/models/ingredient";
 import { Form as FinalForm, Field } from "react-final-form";
 import TextInput from "../../../app/common/form/TextInput";
 import { SelectInput } from "../../../app/common/form/SelectInput";
@@ -33,9 +36,13 @@ const validate = combineValidators({
 
 interface IProps {
   triggerModalView(active: boolean): void;
+  isNewIngredient: boolean;
 }
 
-const IngredientForm: React.FC<IProps> = ({ triggerModalView }) => {
+const IngredientForm: React.FC<IProps> = ({
+  triggerModalView,
+  isNewIngredient,
+}) => {
   const ingredientStore = useContext(IngredientStore);
   const {
     createIngredient,
@@ -56,13 +63,12 @@ const IngredientForm: React.FC<IProps> = ({ triggerModalView }) => {
     const { ...ingredient } = values;
 
     if (!ingredient.id) {
-
       // console.log(newIngredient);
       let recipeId = ingredient.relist ? "1" : "0";
 
       let newIngredient: IIngredient = {
         ...ingredient,
-        'recipe_id':recipeId
+        recipe_id: recipeId,
         // id: uuid(), // generates a new guid
       };
       createIngredient(newIngredient, recipeId, user!.id);
@@ -82,25 +88,16 @@ const IngredientForm: React.FC<IProps> = ({ triggerModalView }) => {
             onSubmit={handleFinalFormSubmit}
             render={({ handleSubmit, invalid, pristine }) => (
               <Form onSubmit={handleSubmit} loading={loading}>
-                  <label>Name</label>
-                  <Field
-                    name="name"
-                    // placeholder="Name"
-                    value={ingredient.name}
-                    component={TextInput}
-                  />
-                {/* <Field
-                  name="missing_amount"
-                  placeholder="Missing Amount"
-                  // value={(parseInt(ingredient.total_amount) - parseInt(ingredient.actual_amount)).toString}
-                  value={(parseInt(ingredient.total_amount) - parseInt(ingredient.actual_amount)).toString()}
-                  component={NumberInput}
-                /> */}
+                <label>Name</label>
+                <Field
+                  name="name"
+                  value={ingredient.name}
+                  component={TextInput}
+                />
 
                 <label>Actual Amount</label>
                 <Field
                   name="actual_amount"
-                  // placeholder="Actual Amount"
                   value={ingredient.actual_amount}
                   component={NumberInput}
                 />
@@ -108,7 +105,6 @@ const IngredientForm: React.FC<IProps> = ({ triggerModalView }) => {
                 <label>Total Amount</label>
                 <Field
                   name="total_amount"
-                  // placeholder="Total Amount"
                   value={ingredient.total_amount}
                   component={NumberInput}
                 />
@@ -116,7 +112,6 @@ const IngredientForm: React.FC<IProps> = ({ triggerModalView }) => {
                 <label>Unit</label>
                 <Field
                   name="unit"
-                  // placeholder="Unit"
                   value={ingredient.unit}
                   component={TextInput}
                 />
@@ -126,13 +121,12 @@ const IngredientForm: React.FC<IProps> = ({ triggerModalView }) => {
                   name="relist"
                   component="input"
                   type="checkbox"
-                  format={v => v === true}
-                  parse={v => (v ? true : false)}
+                  format={(v) => v === true}
+                  parse={(v) => (v ? true : false)}
                   style={{ marginLeft: "1.0em" }}
                 />
 
                 <Button
-                  // adding a loading indicator
                   loading={submitting}
                   floated="right"
                   positive

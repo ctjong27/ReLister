@@ -5,6 +5,7 @@ import { IIngredient } from "../../../app/models/ingredient";
 import { Form as FinalForm, Field, Form } from "react-final-form";
 import NumberInput from "../../../app/common/form/NumberInput";
 import BuyIngredientModal from "../modals/BuyIngredientModal";
+import EditIngredientModal from "../modals/EditIngredientModal";
 
 const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
   ingredient,
@@ -21,10 +22,11 @@ const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
               {ingredient.actual_amount} out of {ingredient.total_amount}{" "}
             </Item.Description>
           </Item.Content>
+          <EditIngredientModal />
           <BuyIngredientModal ingredientId={ingredient.id} actualAmount={ingredient.actual_amount}/>
-          <Button floated="right" color="orange">
+          {/* <Button floated="right" color="orange">
             Update
-          </Button>
+          </Button> */}
         </Item>
       </Item.Group>
 

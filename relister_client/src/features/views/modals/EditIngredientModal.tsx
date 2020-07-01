@@ -4,41 +4,32 @@ import React from "react";
 import RecipeForm from "../forms/RecipeForm";
 import { observer } from "mobx-react-lite";
 import IngredientForm from "../forms/IngredientForm";
-import BuyIngredientForm from "../forms/BuyIngredientForm";
 
-interface IProps {
-    ingredientId: string;
-    actualAmount: number;
-  }
-
-const BuyIngredientModal: React.FC<IProps> = ({ingredientId, actualAmount}) => {
+const EditIngredientModal: React.FC = () => {
   const [modelIsOpen, triggerModalView] = useState<boolean>(false);
 
   return (
     <Modal
       onClose={() => triggerModalView(false)}
-      closeIcon
       open={modelIsOpen}
       trigger={
         <Button
-          floated="right"
-          color="green"
+          color='orange'
           onClick={() => triggerModalView(true)}
-        //   as="a"
           style={{ marginLeft: "0.5em" }}
         >
-          Buy
+          Edit
         </Button>
       }
     >
-      <Modal.Header>New Ingredient</Modal.Header>
+      <Modal.Header>Edit Ingredient</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-          <BuyIngredientForm triggerModalView={triggerModalView} ingredientId={ingredientId} actualAmount={actualAmount}/>
+          <IngredientForm triggerModalView={triggerModalView} isNewIngredient={false}/>
         </Modal.Description>
       </Modal.Content>
     </Modal>
   );
 };
 
-export default observer(BuyIngredientModal);
+export default observer(EditIngredientModal);

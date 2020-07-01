@@ -5,7 +5,7 @@ import RecipeForm from "../forms/RecipeForm";
 import { observer } from "mobx-react-lite";
 import IngredientForm from "../forms/IngredientForm";
 
-const NewIngredientDashboard: React.FC = () => {
+const NewIngredientModal: React.FC = () => {
   const [modelIsOpen, triggerModalView] = useState<boolean>(false);
 
   return (
@@ -25,11 +25,11 @@ const NewIngredientDashboard: React.FC = () => {
       <Modal.Header>New Ingredient</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-          <IngredientForm triggerModalView={triggerModalView} />
+          <IngredientForm triggerModalView={triggerModalView} isNewIngredient={true}/>
         </Modal.Description>
       </Modal.Content>
     </Modal>
   );
 };
 
-export default observer(NewIngredientDashboard);
+export default observer(NewIngredientModal);

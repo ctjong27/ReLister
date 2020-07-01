@@ -106,6 +106,7 @@ class IngredientStore {
     // mobx observable documentaion = get : returns value or undefined if not found
     return this.ingredientRegistry.get(id);
   }
+  
   @action createIngredient = async (ingredient: IIngredient, recipe_id: string, user_id: string) => {
     this.submitting = true;
     try {
@@ -137,7 +138,7 @@ class IngredientStore {
         this.ingredient = ingredient;
         this.submitting = false;
       });
-      history.push(`/ingredient/${ingredient.id}`);
+      // history.push(`/ingredient/${ingredient.id}`);
     }
     catch (error) {
       runInAction('edit ingredient error', () => {

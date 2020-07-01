@@ -25,3 +25,6 @@ not entirely sure
 probably 1st is the better choice for consistency
 
 next logical thing would be to implement group add with user registration data
+
+* 06-29-2020
+add boolean to trigger buy/sell logic for numbers

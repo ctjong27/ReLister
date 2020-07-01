@@ -22,62 +22,75 @@ import { SelectInput } from "../../../app/common/form/SelectInput";
 import { TextAreaInput } from "../../../app/common/form/TextAreaInput";
 import NumberInput from "../../../app/common/form/NumberInput";
 
+export interface IUpdatedAmountValue {
+  amount: number;
+}
+
+export class UpdatedAmountValue {
+  amount: number = 55;
+
+  constructor(init?: IUpdatedAmountValue) {
+    Object.assign(this, init);
+  }
+}
+
 interface IProps {
   triggerModalView(active: boolean): void;
   ingredientId: string;
   actualAmount: number;
 }
 
-const BuyIngredientForm: React.FC<IProps> = ({ triggerModalView, ingredientId, actualAmount }) => {
+const BuyIngredientForm: React.FC<IProps> = ({
+  triggerModalView,
+  ingredientId,
+  actualAmount,
+}) => {
   const ingredientStore = useContext(IngredientStore);
   const userStore = useContext(UserStore);
 
-  const { createIngredient, editIngredient, loadIngredient, submitting } = ingredientStore;
+  const {
+    createIngredient,
+    editIngredient,
+    loadIngredient,
+    submitting,
+  } = ingredientStore;
   const { user } = userStore;
 
-  const [ingredient, setIngredient] = useState(new IngredientFormValues());
   const [loading, setLoading] = useState(false);
+  // const [ingredient, setIngredient] = useState(new IngredientFormValues());
+  // const [updatedAmount, setUpdatedAmount] = useState(new UpdatedAmountValue());
 
-
-
-
-  // we want to run useEffect only when there is an id since component will re-render whenever state is updated
-  useEffect(() => {
-    // 0 length check validates we do not reload if activity is loaded
-    // if (match.params.id && activity.id) {
-    if (ingredientId) {
-      setLoading(true);
-
-      loadIngredient(ingredientId)
-        .then(
-          // () => initialFormState && setActivity(initialFormState)
-          // activity is promise returned from activityStore
-          (ingredient) => setIngredient(new IngredientFormValues(ingredient))
-        )
-        .finally(() => setLoading(false));
-    }
-
-    // return () => {
-    //   clearActivity();
-    // };
-  }, [
-    ingredientId,
-    loadIngredient,
-    // clearActivity,
-    // match.params.id,
-    // initialFormState, // remved so the data retrieval doesn't re-run. replaced with retrieval of activity promise
-    // activity.id,
-  ]);
-
-
+  // useEffect(() => {
+  //   setIngredient(new IngredientFormValues())
+  //   setUpdatedAmount(new UpdatedAmountValue())
+  // }, [
+  //   setIngredient,
+  //   setUpdatedAmount,
+  // ]);
 
   const handleFinalFormSubmit = (values: any) => {
-    // const { ...ingredient } = values;
+    setLoading(true);
+
+    const { actualAmount } = values;
+
+    loadIngredient(ingredientId)
+      .then(
+        // () => initialFormState && setActivity(initialFormState)
+        // activity is promise returned from activityStore
+        (ingredient) => {
+          console.log(ingredient)
+          console.log(ingredient.actual_amount)
+          console.log(typeof ingredient.actual_amount)
+          console.log(actualAmount)
+          console.log(typeof actualAmount)
+          console.log(ingredient.actual_amount+actualAmount)
+          editIngredient({...ingredient, actual_amount: ingredient.actual_amount + Number(actualAmount)})}
+      )
+      .finally(() => setLoading(false));
 
     // if (!ingredient.id) {
     //   // console.log(newIngredient);
     //   let recipeId = ingredient.relist ? "1" : "0";
-
     //   let newIngredient: IIngredient = {
     //     ...ingredient,
     //     recipe_id: recipeId,
@@ -88,45 +101,32 @@ const BuyIngredientForm: React.FC<IProps> = ({ triggerModalView, ingredientId, a
     //   editIngredient(ingredient);
     // }
     // triggerModalView(false);
+
+
   };
 
-
-  console.log('ingredientId', ingredientId)
-  console.log('actualAmount', actualAmount)
   return (
     <Segment clearing>
       <Grid centered>
         <FinalForm
           //   validate={validate}
-          initialValues={ingredient}
+          // initialValues={updatedAmount}
           onSubmit={handleFinalFormSubmit}
-          render={({ handleSubmit, invalid, pristine }) => (
+          render={({ handleSubmit, pristine }) => (
             <Form onSubmit={handleSubmit} loading={loading}>
               <Item.Group>
                 <Item>
-                  <Button>
-                    <Icon name="minus" />
-                  </Button>
-                  <Field
-                    name="actual_amount"
-                    // placeholder="Actual Amount"
-                    value={ingredient.actual_amount}
-                    component={NumberInput}
-                  />
-                  <Button>
-                    <Icon name="plus" />
-                  </Button>
+                  <Field name="actualAmount" component={NumberInput} />
                 </Item>
               </Item.Group>
 
               <Button
-                // adding a loading indicator
                 loading={submitting}
                 floated="right"
                 positive
                 type="submit"
                 content="Submit"
-                disabled={loading || pristine || invalid}
+                disabled={loading || pristine}
               />
               <Button
                 as="a"
