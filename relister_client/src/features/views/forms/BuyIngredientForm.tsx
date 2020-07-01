@@ -78,31 +78,13 @@ const BuyIngredientForm: React.FC<IProps> = ({
         // () => initialFormState && setActivity(initialFormState)
         // activity is promise returned from activityStore
         (ingredient) => {
-          console.log(ingredient)
-          console.log(ingredient.actual_amount)
-          console.log(typeof ingredient.actual_amount)
-          console.log(actualAmount)
-          console.log(typeof actualAmount)
-          console.log(ingredient.actual_amount+actualAmount)
-          editIngredient({...ingredient, actual_amount: ingredient.actual_amount + Number(actualAmount)})}
+          editIngredient({
+            ...ingredient,
+            actual_amount: ingredient.actual_amount + Number(actualAmount),
+          });
+        }
       )
       .finally(() => setLoading(false));
-
-    // if (!ingredient.id) {
-    //   // console.log(newIngredient);
-    //   let recipeId = ingredient.relist ? "1" : "0";
-    //   let newIngredient: IIngredient = {
-    //     ...ingredient,
-    //     recipe_id: recipeId,
-    //     // id: uuid(), // generates a new guid
-    //   };
-    //   createIngredient(newIngredient, recipeId, user!.id);
-    // } else {
-    //   editIngredient(ingredient);
-    // }
-    // triggerModalView(false);
-
-
   };
 
   return (

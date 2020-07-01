@@ -25,7 +25,7 @@ const NewIngredientModal: React.FC = () => {
       <Modal.Header>New Ingredient</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-          <IngredientForm triggerModalView={triggerModalView} isNewIngredient={true}/>
+          <IngredientForm triggerModalView={triggerModalView} ingredientId={''} isNewIngredient={true}/>
         </Modal.Description>
       </Modal.Content>
     </Modal>

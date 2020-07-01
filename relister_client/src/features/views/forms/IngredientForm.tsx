@@ -36,40 +36,52 @@ const validate = combineValidators({
 
 interface IProps {
   triggerModalView(active: boolean): void;
+  ingredientId: string;
   isNewIngredient: boolean;
 }
 
 const IngredientForm: React.FC<IProps> = ({
   triggerModalView,
+  ingredientId,
   isNewIngredient,
 }) => {
   const ingredientStore = useContext(IngredientStore);
   const {
+    loadIngredient,
     createIngredient,
     editIngredient,
     submitting,
-    // ingredient: initialFormState,
-    // clearIngredient,
   } = ingredientStore;
 
   const userStore = useContext(UserStore);
   const { user } = userStore;
-
   const [ingredient, setIngredient] = useState(new IngredientFormValues());
-
   const [loading, setLoading] = useState(false);
+
+  // set effect
+  useEffect(() => {
+    if (ingredientId !== '') {
+      setLoading(true);
+
+      loadIngredient(ingredientId)
+        .then(
+          (ingredient) => setIngredient(new IngredientFormValues(ingredient))
+        )
+        .finally(() => setLoading(false));
+    }
+  }, [ingredientId,
+    loadIngredient,
+    setIngredient]);
 
   const handleFinalFormSubmit = (values: any) => {
     const { ...ingredient } = values;
 
     if (!ingredient.id) {
-      // console.log(newIngredient);
       let recipeId = ingredient.relist ? "1" : "0";
 
       let newIngredient: IIngredient = {
         ...ingredient,
         recipe_id: recipeId,
-        // id: uuid(), // generates a new guid
       };
       createIngredient(newIngredient, recipeId, user!.id);
     } else {

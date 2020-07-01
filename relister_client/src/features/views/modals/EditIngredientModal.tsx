@@ -5,7 +5,11 @@ import RecipeForm from "../forms/RecipeForm";
 import { observer } from "mobx-react-lite";
 import IngredientForm from "../forms/IngredientForm";
 
-const EditIngredientModal: React.FC = () => {
+interface IProps {
+  ingredientId: string;
+}
+
+const EditIngredientModal: React.FC<IProps> = ({ingredientId}) => {
   const [modelIsOpen, triggerModalView] = useState<boolean>(false);
 
   return (
@@ -25,7 +29,7 @@ const EditIngredientModal: React.FC = () => {
       <Modal.Header>Edit Ingredient</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-          <IngredientForm triggerModalView={triggerModalView} isNewIngredient={false}/>
+          <IngredientForm triggerModalView={triggerModalView} ingredientId={ingredientId} isNewIngredient={false}/>
         </Modal.Description>
       </Modal.Content>
     </Modal>
