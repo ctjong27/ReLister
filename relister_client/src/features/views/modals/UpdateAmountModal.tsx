@@ -4,15 +4,18 @@ import React from "react";
 import RecipeForm from "../forms/RecipeForm";
 import { observer } from "mobx-react-lite";
 import IngredientForm from "../forms/IngredientForm";
-import BuyIngredientForm from "../forms/BuyIngredientForm";
+import UpdateAmountForm from "../forms/UpdateAmountForm";
 
 interface IProps {
     ingredientId: string;
     actualAmount: number;
+    filterType: string;
   }
 
-const BuyIngredientModal: React.FC<IProps> = ({ingredientId, actualAmount}) => {
+const UpdateAmountModal: React.FC<IProps> = ({ingredientId, actualAmount, filterType}) => {
   const [modelIsOpen, triggerModalView] = useState<boolean>(false);
+
+  const buttonLabel = (filterType==="shopping"?'Buy':'Use')
 
   return (
     <Modal
@@ -27,18 +30,18 @@ const BuyIngredientModal: React.FC<IProps> = ({ingredientId, actualAmount}) => {
         //   as="a"
           style={{ marginLeft: "0.5em" }}
         >
-          Buy
+          {buttonLabel}
         </Button>
       }
     >
-      <Modal.Header>New Ingredient</Modal.Header>
+      <Modal.Header>{buttonLabel} Ingredient</Modal.Header>
       <Modal.Content image>
         <Modal.Description>
-          <BuyIngredientForm triggerModalView={triggerModalView} ingredientId={ingredientId} actualAmount={actualAmount}/>
+          <UpdateAmountForm triggerModalView={triggerModalView} ingredientId={ingredientId} actualAmount={actualAmount} filterType={filterType}/>
         </Modal.Description>
       </Modal.Content>
     </Modal>
   );
 };
 
-export default observer(BuyIngredientModal);
+export default observer(UpdateAmountModal);

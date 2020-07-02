@@ -20,7 +20,7 @@ const ShoppingListDashboard: React.FC = () => {
   return (
     <Grid>
       <Grid.Column width={10}>
-        <IngredientList />
+        {/* <IngredientList filterType={filterType}/> */}
       </Grid.Column>
       {/* <Grid.Column width={6}>
         <h2>Ingredient filters</h2>

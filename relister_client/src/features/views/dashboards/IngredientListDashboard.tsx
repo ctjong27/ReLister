@@ -9,8 +9,6 @@ import { LoadingComponent } from "../../../app/layout/LoadingComponent";
 const IngredientListDashboard: React.FC<{filterType:string}> = ({filterType}) => {
   const ingredientStore = useContext(IngredientStore);
 
-  console.log('filterType', filterType)
-
   useEffect(() => {
     ingredientStore.loadIngredients(filterType);
   }, [ingredientStore]);
@@ -26,7 +24,7 @@ const IngredientListDashboard: React.FC<{filterType:string}> = ({filterType}) =>
           {/* <Button color='green' floated="right">Shop</Button>
           <br/>
           <br/> */}
-          <IngredientList />
+          <IngredientList filterType={filterType} />
         </Grid.Column>
         {/* <Grid.Column width={6}>
         <h2>Ingredient filters</h2>

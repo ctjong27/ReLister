@@ -6,7 +6,7 @@ import IngredientStore from "../../../app/stores/ingredientStore";
 
 // react.fc allows me to pass in parameters as indicated in type
 // OH! React.FC<t> means I get to specify what type is passed in
-const IngredientList: React.FC = () => {
+const IngredientList: React.FC<{filterType:string}> = ({filterType}) => {
   const ingredientStore = useContext(IngredientStore);
   const {ingredientsByRecipe} = ingredientStore;
   return (
@@ -20,7 +20,7 @@ const IngredientList: React.FC = () => {
           {/* adds divider between each item */}
           <Item.Group divided>
             {ingredients.map((ingredient) => (
-              <IngredientListItem key={ingredient.id} ingredient={ingredient} />
+              <IngredientListItem key={ingredient.id} ingredient={ingredient} filterType={filterType}/>
             ))}
           </Item.Group>
         </Fragment>

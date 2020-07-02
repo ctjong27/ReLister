@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import { IIngredient } from "../../../app/models/ingredient";
 import { Form as FinalForm, Field, Form } from "react-final-form";
 import NumberInput from "../../../app/common/form/NumberInput";
-import BuyIngredientModal from "../modals/BuyIngredientModal";
+import UpdateAmountModal from "../modals/UpdateAmountModal";
 import EditIngredientModal from "../modals/EditIngredientModal";
 
-const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
+const IngredientListItem: React.FC<{ ingredient: IIngredient, filterType:string }> = ({
   ingredient,
+  filterType
 }) => {
   const handleFinalFormSubmit = (values: any) => {};
 
@@ -24,9 +25,10 @@ const IngredientListItem: React.FC<{ ingredient: IIngredient }> = ({
           </Item.Content>
           <EditIngredientModal 
             ingredientId={ingredient.id}/>
-          <BuyIngredientModal
+          <UpdateAmountModal
             ingredientId={ingredient.id}
-            actualAmount={ingredient.actual_amount}/>
+            actualAmount={ingredient.actual_amount}
+            filterType={filterType}/>
         </Item>
       </Item.Group>
     </Segment.Group>

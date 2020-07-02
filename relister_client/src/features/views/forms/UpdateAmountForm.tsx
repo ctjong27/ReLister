@@ -38,12 +38,14 @@ interface IProps {
   triggerModalView(active: boolean): void;
   ingredientId: string;
   actualAmount: number;
+  filterType: string;
 }
 
-const BuyIngredientForm: React.FC<IProps> = ({
+const UpdateAmountForm: React.FC<IProps> = ({
   triggerModalView,
   ingredientId,
   actualAmount,
+  filterType,
 }) => {
   const ingredientStore = useContext(IngredientStore);
   const userStore = useContext(UserStore);
@@ -57,16 +59,6 @@ const BuyIngredientForm: React.FC<IProps> = ({
   const { user } = userStore;
 
   const [loading, setLoading] = useState(false);
-  // const [ingredient, setIngredient] = useState(new IngredientFormValues());
-  // const [updatedAmount, setUpdatedAmount] = useState(new UpdatedAmountValue());
-
-  // useEffect(() => {
-  //   setIngredient(new IngredientFormValues())
-  //   setUpdatedAmount(new UpdatedAmountValue())
-  // }, [
-  //   setIngredient,
-  //   setUpdatedAmount,
-  // ]);
 
   const handleFinalFormSubmit = (values: any) => {
     setLoading(true);
@@ -80,11 +72,12 @@ const BuyIngredientForm: React.FC<IProps> = ({
         (ingredient) => {
           editIngredient({
             ...ingredient,
-            actual_amount: ingredient.actual_amount + Number(actualAmount),
+              actual_amount: filterType==='shopping'? (ingredient.actual_amount + Number(actualAmount)) : (ingredient.actual_amount - Number(actualAmount))
           });
         }
       )
       .finally(() => setLoading(false));
+      triggerModalView(false);
   };
 
   return (
@@ -126,4 +119,4 @@ const BuyIngredientForm: React.FC<IProps> = ({
   );
 };
 
-export default observer(BuyIngredientForm);
+export default observer(UpdateAmountForm);
