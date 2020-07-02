@@ -95,3 +95,15 @@ class IngredientList(Resource):
     def get(self):
         # return {'ingredients': [ingredient.json() for ingredient in IngredientModel.query.all()]}
         return [ingredient.json() for ingredient in IngredientModel.query.all()]
+
+class FilteredIngredientList(Resource):
+    def get(self, filter_type):
+        
+        if filter_type == 'shopping':
+            print('shopping')
+            return [ingredient.json() for ingredient in IngredientModel.get_shopping_list()]
+        elif filter_type == 'pantry':
+            print('pantry')
+            return [ingredient.json() for ingredient in IngredientModel.get_pantry_list()]
+        else:
+            return [ingredient.json() for ingredient in IngredientModel.query.all()]

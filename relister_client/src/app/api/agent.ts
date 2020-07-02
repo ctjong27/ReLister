@@ -47,6 +47,7 @@ const requests = {
 
 const Ingredients ={
     list: (): Promise<IIngredient[]> => requests.get('/ingredients'),
+    filtered_list: (filterType: string): Promise<IIngredient[]> => requests.get(`/filtered_ingredients/${filterType}`),
     details: (name: string) => requests.get(`/ingredient/${name}`),
     create: (name:string, ingredient:IIngredient) => requests.post(`/ingredient/${name}`, ingredient),
     // create: (name:string, user_id:Object) => requests.post(`/recipe/${name}`, user_id),

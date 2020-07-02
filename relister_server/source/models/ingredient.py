@@ -38,6 +38,14 @@ class IngredientModel(db.Model):
     def find_by_name(cls, name):
         return cls.query.filter_by(name=name).first()
 
+    @classmethod
+    def get_shopping_list(self):
+        return self.query.filter(self.actual_amount<self.total_amount)
+
+    @classmethod
+    def get_pantry_list(self):
+        return self.query.filter(self.actual_amount>=self.total_amount)
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()

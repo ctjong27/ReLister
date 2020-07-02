@@ -10,7 +10,7 @@ const ShoppingListDashboard: React.FC = () => {
   const ingredientStore = useContext(IngredientStore);
 
   useEffect(() => {
-    ingredientStore.loadIngredients();
+    ingredientStore.loadIngredients('shopping');
   }, [ingredientStore]);
 
   // // mobx-react-lite turns react components into observers that detects changes in observables

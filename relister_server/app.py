@@ -7,7 +7,7 @@ from flask_cors import CORS, cross_origin
 from source.security import authenticate, identity
 from source.resources.user import UserRegister, UserDetail
 from source.resources.recipe import Recipe, RecipeList
-from source.resources.ingredient import Ingredient, IngredientList
+from source.resources.ingredient import FilteredIngredientList, Ingredient, IngredientList
 from source.db import db
 
 from datetime import timedelta
@@ -53,6 +53,7 @@ def customized_error_handler(error):
 
 api.add_resource(Ingredient, '/ingredient/<string:name>') # https://localhost:5000/student/Rolf
 api.add_resource(IngredientList, '/ingredients')
+api.add_resource(FilteredIngredientList, '/filtered_ingredients/<string:filter_type>')
 api.add_resource(Recipe, '/recipe/<string:name>')
 api.add_resource(RecipeList, '/recipes')
 api.add_resource(UserRegister, '/register')

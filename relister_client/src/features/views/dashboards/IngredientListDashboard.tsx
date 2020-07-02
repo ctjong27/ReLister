@@ -6,11 +6,13 @@ import { observer } from "mobx-react-lite";
 import IngredientStore from "../../../app/stores/ingredientStore";
 import { LoadingComponent } from "../../../app/layout/LoadingComponent";
 
-const IngredientListDashboard: React.FC = () => {
+const IngredientListDashboard: React.FC<{filterType:string}> = ({filterType}) => {
   const ingredientStore = useContext(IngredientStore);
 
+  console.log('filterType', filterType)
+
   useEffect(() => {
-    ingredientStore.loadIngredients();
+    ingredientStore.loadIngredients(filterType);
   }, [ingredientStore]);
 
   // // mobx-react-lite turns react components into observers that detects changes in observables
@@ -21,9 +23,9 @@ const IngredientListDashboard: React.FC = () => {
     <Fragment>
       <Grid centered>
         <Grid.Column width={10}>
-          <Button color='green' floated="right">Shop</Button>
+          {/* <Button color='green' floated="right">Shop</Button>
           <br/>
-          <br/>
+          <br/> */}
           <IngredientList />
         </Grid.Column>
         {/* <Grid.Column width={6}>

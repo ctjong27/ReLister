@@ -40,11 +40,15 @@ class IngredientStore {
       {} as { [key: string]: IIngredient[] }));
   }
 
-  @action loadIngredients = async () => {
+  @action clearIngredients = async () => {
+    this.ingredientRegistry.clear()
+  }
+
+  @action loadIngredients = async (filterType:string) => {
     this.loadingInitial = true;
     try {
       // this returns result of promise
-      const ingredients = await agent.Ingredients.list();
+      const ingredients = await agent.Ingredients.filtered_list(filterType);
       runInAction('loading ingredients', () => {
         console.log(ingredients)
         ingredients.forEach((ingredient) => {
@@ -113,7 +117,8 @@ class IngredientStore {
       await agent.Ingredients.create(ingredient.name, { ...ingredient, 'recipe_id': recipe_id, 'user_id': user_id });
       runInAction('creating ingredient', () => {
         // this.ingredientRegistry.set(ingredient.id, ingredient);
-        this.loadIngredients()
+        // this.loadIngredients()
+        history.push('/shopping_list');
         this.submitting = false;
       });
       // history.push(`/ingredient/${ingredient.id}`);
